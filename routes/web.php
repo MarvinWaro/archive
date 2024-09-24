@@ -44,6 +44,7 @@ Route::prefix('admin')->group(function () {
         Route::get('records/{id}/edit', 'edit'); // Edit record
         Route::put('records/{id}', 'update'); // Update record
         Route::delete('records/{id}', 'destroy'); // Delete record
+        Route::get('records/show', 'show');
 
         Route::get('acic', 'acic_records')->name('acicLoad'); // ACIC records
         Route::get('mds', 'mds_records'); // MDS records

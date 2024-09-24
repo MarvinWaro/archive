@@ -1181,8 +1181,15 @@ tbody tr td a{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
 }
 
-
-
+.status-container.completed{
+    background-color: var(--bs-green);
+    color: var(--bs-light);
+    border-radius: 10px;
+    padding: 15px 10px;
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 10px;
+}
 
 
 
