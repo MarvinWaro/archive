@@ -115,6 +115,13 @@
                     </div>
                 @endif
             </div>
+            <div class="alert-wrapper">
+                @if (session('deleted'))
+                    <div class="alert alert-danger alert-position" role="alert" id="danger-alert">
+                        {{ session('deleted') }}
+                    </div>
+                @endif
+            </div>
 
 
             <div class="d-flex justify-content-end mb-3 mx-5">
@@ -147,9 +154,22 @@
                             <tr>
                                 <td>
                                     <div class="icon-container">
-                                        <a href="#!"><i class="fa-solid fa-trash action-icon delete-icon"></i></a>
-                                        <a href="#!"><i class="fa-solid fa-pen-to-square action-icon edit-icon"></i></a>
-                                        <a href="#!"><i class="fa-solid fa-eye action-icon view-icon"></i></a>
+                                        <!-- Delete Button -->
+                                        <form action="{{ url('admin/records/' . $record->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" style="border: none; background: none; padding: 0;">
+                                                <i class="fa-solid fa-trash action-icon delete-icon"></i>
+                                            </button>
+                                        </form>
+                                        <!-- Edit Button -->
+                                        <a href="{{ url('admin/records/'. $record->id .'/edit') }}">
+                                            <i class="fa-solid fa-pen-to-square action-icon edit-icon"></i>
+                                        </a>
+                                        <!-- View Button -->
+                                        <a href="#!">
+                                            <i class="fa-solid fa-eye action-icon view-icon"></i>
+                                        </a>
                                     </div>
                                 </td>
                                 <td>{{ $record->id }}</td>
