@@ -1181,7 +1181,9 @@ tbody tr td a{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
 }
 
-.status-container.completed{
+/* SHOW */
+
+/* .status-container.completed{
     background-color: var(--bs-green);
     color: var(--bs-light);
     border-radius: 10px;
@@ -1189,6 +1191,44 @@ tbody tr td a{
     font-weight: bold;
     font-size: 20px;
     letter-spacing: 10px;
+} */
+
+.status-container {
+    display: inline-block; /* Makes the container as wide as the content */
+    padding: 10px 130px; /* Add 20px padding on left and right */
+    background-color: #28a745; /* Example background color for visibility */
+    color: #fff; /* Text color */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 7px;
+}
+
+
+.folder-name-container > h2{
+    color: var(--maincolor);
+    font-weight: 800;
+    font-size: 50px;
+}
+
+.head-folder-container .date-container .date{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 5px 10px;
+    letter-spacing: 5px;
+    color: #1d1d1db6;
+}
+
+.type-container{
+    color: var(--maincolor);
+    font-weight: 600;
+    font-size: 25px;
+}
+
+.others-container{
+    font-weight: 500;
+    color: #1d1d1db6;
+    margin-top: 8px;
 }
 
 

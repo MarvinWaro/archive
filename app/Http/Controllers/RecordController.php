@@ -98,12 +98,6 @@ class RecordController extends Controller
         return redirect('admin/dashboard')->with('message', 'Record Updated Successfully');
     }
 
-    public function show()
-    {
-        return view('admin/show');
-    }
-
-
     public function destroy($id)
     {
         $record = Record::findOrFail($id);
@@ -111,6 +105,13 @@ class RecordController extends Controller
 
         return redirect('admin/dashboard')->with('deleted', 'Record deleted successfully.');
     }
+
+    public function show($id)
+    {
+        $record = Record::with(['year', 'submissionYear'])->findOrFail($id);
+        return response()->json($record); // You can return this via AJAX if needed
+    }
+
 
 // ACIC
 

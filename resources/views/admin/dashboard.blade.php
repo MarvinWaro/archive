@@ -128,6 +128,32 @@
                 <a href="{{ url('admin/records/create') }}" id="acic_add_new_record" class="btn add_record_button" type="button"> Add new record</a>
             </div>
 
+            @foreach ($records as $record)
+            <!-- Modal for viewing record details -->
+            <div class="modal fade" id="viewRecordModal{{ $record->id }}" tabindex="-1" aria-labelledby="viewRecordLabel{{ $record->id }}" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="viewRecordLabel{{ $record->id }}">Record Details</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>Folder Name:</strong> {{ $record->folder_name }}</p>
+                            <p><strong>Folder Type:</strong> {{ $record->folder_type }}</p>
+                            <p><strong>Year:</strong> {{ $record->year->year }}</p>
+                            <p><strong>Submission Year:</strong> {{ $record->submissionYear->year }}</p>
+                            <p><strong>Status:</strong> {{ $record->status }}</p>
+                            <p><strong>Others:</strong> {{ $record->others }}</p>
+                            <p><strong>Remarks:</strong> {{ $record->remarks }}</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+
             {{-- TABLE START --}}
 
             <div class="table-container mx-5 mb-5">
@@ -154,7 +180,12 @@
                             <tr>
                                 <td>
                                     <div class="icon-container">
-                                        <!-- Delete Button -->
+                                        <a href="javascript:void(0);" role="button" data-bs-toggle="modal" data-bs-target="#viewRecordModal{{ $record->id }}" type="button">
+                                            <i class="fa-solid fa-eye action-icon view-icon"></i>
+                                        </a>
+                                        <a href="{{ url('admin/records/'. $record->id .'/edit') }}">
+                                            <i class="fa-solid fa-pen-to-square action-icon edit-icon"></i>
+                                        </a>
                                         <form action="{{ url('admin/records/' . $record->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this record?');">
                                             @csrf
                                             @method('DELETE')
@@ -162,16 +193,9 @@
                                                 <i class="fa-solid fa-trash action-icon delete-icon"></i>
                                             </button>
                                         </form>
-                                        <!-- Edit Button -->
-                                        <a href="{{ url('admin/records/'. $record->id .'/edit') }}">
-                                            <i class="fa-solid fa-pen-to-square action-icon edit-icon"></i>
-                                        </a>
-                                        <!-- View Button -->
-                                        <a href="{{ url('admin/records/show') }}">
-                                            <i class="fa-solid fa-eye action-icon view-icon"></i>
-                                        </a>
                                     </div>
                                 </td>
+
                                 <td>{{ $record->id }}</td>
                                 <td>{{ $record->year->year ?? 'N/A' }}</td>
                                 <td>{{ strtoupper(date('F', mktime(0, 0, 0, $record->month, 1))) }}</td>

@@ -85,7 +85,7 @@
         <div class="py-4 mt-4">
             <!-- start: Summary -->
 
-            <div class="container text-center">
+            <div class="w-50 text-center mx-auto">
 
                 <div class="head-folder-container mb-4">
                     <div class="mb-3 status-container completed">
@@ -93,12 +93,12 @@
                     </div>
 
                     <div class="folder-name-container">
-                        ACIC COSCO
+                        <h2>ACIC COSCO</h2>
                     </div>
 
                     <div class="date-container">
-                        <span>2023</span>
-                        <span>JUNE</span>
+                        <span class="date">2023</span>
+                        <span class="date">JUNE</span>
                     </div>
                 </div>
 
