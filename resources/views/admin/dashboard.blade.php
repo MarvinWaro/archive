@@ -134,7 +134,7 @@
                             <th class="pe-4 number" >Year</th>
                             <th>Month</th>
                             <th>Folder Name</th>
-                            <th>Folder Number</th>
+                            <th>Folder Type</th>
                             <th>Number</th> <!-- Column to truncate -->
                             <th>Submission Date</th>
                             <th>Status</th>
