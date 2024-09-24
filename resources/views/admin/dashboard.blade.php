@@ -23,7 +23,7 @@
                         <a href="{{ url('admin/dashboard') }}" class="fw-semibold">
                             <i class="fa-solid fa-chart-pie sidebar-menu-item-icon py-2"></i>
                             {{-- <i class="ri-dashboard-line sidebar-menu-item-icon"></i> --}}
-                            dashboard
+                            DASHBOARD
                         </a>
                     </li>
 
