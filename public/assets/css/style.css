@@ -1177,9 +1177,6 @@ tbody tr td a{
     justify-content: center !important; /* Center the text horizontally */
     align-items: center !important; /* Center the text vertically */
     padding: 1rem !important;
-    background-color: #d4edda !important;
-    border-color: #c3e6cb !important;
-    color: #155724 !important;
     border-radius: 4px !important;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
 }

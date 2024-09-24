@@ -55,8 +55,59 @@ class RecordController extends Controller
 
         $record->save();
 
-        return redirect('admin/dashboard')->with('message', 'Record Created');
+        return redirect('admin/dashboard')->with('message', 'Record Created Successfully');
     }
+
+    public function edit(int $id) {
+        $years = Year::orderBy('year', 'desc')->get(); // Fetch years in descending order
+        $submission_years = SubmissionYear::orderBy('year', 'desc')->get(); // Fetch submission years in descending order
+
+        $record = Record::findOrFail($id); // Change this line to use $record
+
+        return view('admin.edit', compact('record', 'years', 'submission_years')); // Use 'record' here
+    }
+
+
+    public function update(Request $request, $id) {
+        $request->validate([
+            'year_id' => 'required',
+            'month' => 'required',
+            'folder_name' => 'required',
+            'folder_type' => 'required',
+            'number' => 'required',
+            'submission_year_id' => 'required',
+            'submission_month' => 'required',
+            'status' => 'required',
+            'others' => 'required',
+        ]);
+
+        $record = Record::findOrFail($id);
+        $record->year_id = $request->year_id;
+        $record->month = $request->month;
+        $record->folder_name = $request->folder_name;
+        $record->folder_type = $request->folder_type;
+        $record->number = $request->number;
+        $record->submission_year_id = $request->submission_year_id;
+        $record->submission_month = $request->submission_month;
+        $record->status = $request->status;
+        $record->others = $request->others;
+        $record->remarks = $request->remarks;
+
+        $record->save();
+
+        return redirect('admin/dashboard')->with('message', 'Record Updated Successfully');
+    }
+
+
+    public function destroy($id)
+    {
+        $record = Record::findOrFail($id);
+        $record->delete();
+
+        return redirect('admin/dashboard')->with('deleted', 'Record deleted successfully.');
+    }
+
+
 
 
 // ACIC
