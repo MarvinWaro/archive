@@ -167,7 +167,7 @@
                                             <i class="fa-solid fa-pen-to-square action-icon edit-icon"></i>
                                         </a>
                                         <!-- View Button -->
-                                        <a href="#!">
+                                        <a href="{{ url('admin/records/show') }}">
                                             <i class="fa-solid fa-eye action-icon view-icon"></i>
                                         </a>
                                     </div>

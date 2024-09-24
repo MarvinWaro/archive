@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-    Admin
+    Admin Edit
 @endsection
 
 @section('content')

@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-    Admin
+    Admin MDS Folder
 @endsection
 
 @section('content')

@@ -98,6 +98,11 @@ class RecordController extends Controller
         return redirect('admin/dashboard')->with('message', 'Record Updated Successfully');
     }
 
+    public function show()
+    {
+        return view('admin/show');
+    }
+
 
     public function destroy($id)
     {
@@ -106,9 +111,6 @@ class RecordController extends Controller
 
         return redirect('admin/dashboard')->with('deleted', 'Record deleted successfully.');
     }
-
-
-
 
 // ACIC
 
