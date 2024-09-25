@@ -92,138 +92,48 @@
 
             {{-- MODAL --}}
 
-            <div class="modal fade" id="addNewRecordModal" tabindex="-1" aria-labelledby="addNewRecordModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addNewRecordModalLabel">Add New MDS Record</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                            <div class="modal-body">
-                                <form id="addRecordForm">
-                                    <div class="row mx-3">
-
-                                        <h6>Folder Year and Month</h6>
-                                        <div class="col-lg-6 mb-3">
-                                            <label for="yearSelect" class="form-label">Year</label>
-                                            <select id="yearSelect" class="form-select">
-                                                <!-- Generate year options dynamically if needed -->
-                                                <option value="">Select Year</option>
-                                                <option value="2024">2024</option>
-                                                <option value="2023">2023</option>
-                                                <option value="2022">2022</option>
-                                                <!-- Add more years as needed -->
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 mb-3">
-                                            <label for="monthSelect" class="form-label">Month</label>
-                                            <select id="monthSelect" class="form-select">
-                                                <!-- Placeholder for month selection -->
-                                                <option value="">Select Month</option>
-                                                <option value="01">January</option>
-                                                <option value="02">February</option>
-                                                <option value="03">March</option>
-                                                <option value="04">April</option>
-                                                <option value="05">May</option>
-                                                <option value="06">June</option>
-                                                <option value="07">July</option>
-                                                <option value="08">August</option>
-                                                <option value="09">September</option>
-                                                <option value="10">October</option>
-                                                <option value="11">November</option>
-                                                <option value="12">December</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="folder_name_select" class="form-label">Folder Name</label>
-                                            <select id="folder_name_select" class="form-select">
-                                                <!-- Generate year options dynamically if needed -->
-                                                <option value="">Select Folder Name</option>
-                                                <option value="MDS_151">MDS 151</option>
-                                                <option value="MDS_101">MDS 101</option>
-                                                <!-- Add more years as needed -->
-                                            </select>
-                                        </div>
-
-                                        <div class="col-lg-4 mb-3">
-                                            <label for="folder_number_select" class="form-label">Folder Number</label>
-                                            <select id="folder_number_select" class="form-select">
-                                                <!-- Generate year options dynamically if needed -->
-                                                <option value="">Select Year</option>
-                                                <option value="check">Check Number</option>
-                                                <option value="acic">Acic Number</option>
-                                                <!-- Add more years as needed -->
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-8 mb-3">
-                                            <label for="text_num" class="form-label">Number</label>
-                                            <textarea name="text_area" id="text_area" cols="30" rows="4" class="form-control" placeholder="Please Enter Acic / Check Number Here"></textarea>
-                                        </div>
-
-                                        <h6>Submission Date</h6>
-                                        <div class="col-lg-6 mb-3">
-                                            <label for="yearSelect" class="form-label">Year</label>
-                                            <select id="yearSelect" class="form-select">
-                                                <!-- Generate year options dynamically if needed -->
-                                                <option value="">Select Year</option>
-                                                <option value="2024">2024</option>
-                                                <option value="2023">2023</option>
-                                                <option value="2022">2022</option>
-                                                <!-- Add more years as needed -->
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 mb-3">
-                                            <label for="monthSelect" class="form-label">Month</label>
-                                            <select id="monthSelect" class="form-select">
-                                                <!-- Placeholder for month selection -->
-                                                <option value="">Select Month</option>
-                                                <option value="01">January</option>
-                                                <option value="02">February</option>
-                                                <option value="03">March</option>
-                                                <option value="04">April</option>
-                                                <option value="05">May</option>
-                                                <option value="06">June</option>
-                                                <option value="07">July</option>
-                                                <option value="08">August</option>
-                                                <option value="09">September</option>
-                                                <option value="10">October</option>
-                                                <option value="11">November</option>
-                                                <option value="12">December</option>
-                                            </select>
-                                        </div>
-
-                                        <div class="col-lg-6 mb-3">
-                                            <label for="status" class="form-label">Status</label>
-                                            <select id="status" class="form-select">
-                                                <!-- Generate year options dynamically if needed -->
-                                                <option value="">Select Status</option>
-                                                <option value="in_progress">In-Progress</option>
-                                                <option value="completed">Completed</option>
-                                                <!-- Add more years as needed -->
-                                            </select>
-                                        </div>
-                                        <div class="col-lg-6 mb-3">
-                                            <label for="others" class="form-label">Others</label>
-                                            <input type="text" name="others" id="others" class="form-control">
-                                        </div>
-
-                                        <div class="mb-3">
-                                            <label for="remarks" class="form-label">Remarks</label>
-                                            <textarea name="text_area" id="text_area" cols="30" rows="4" class="form-control" placeholder="Enter your remarks or comments here"></textarea>
-                                        </div>
-
-                                    </div>
-                                </form>
-
+            @foreach ($mds_records as $record)
+                <!-- Modal for viewing record details -->
+                <div class="modal fade" id="viewRecordModal{{ $record->id }}" tabindex="-1" aria-labelledby="viewRecordLabel{{ $record->id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="viewRecordLabel{{ $record->id }}">Record Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" id="saveRecordButton">Save Record</button>
+                            <div class="modal-body text-center">
+                                <div class="head-folder-container mb-4">
+                                    <div class="mb-3 mb-2 status-container {{ $record->status === 'completed' ? 'completed' : 'in-progress' }} ">
+                                        {{ strtoupper(str_replace('_', ' ', $record->status)) }} <!-- Format status -->
+                                    </div>
+
+                                    <div class="folder-name-container">
+                                        <h2>{{ strtoupper(str_replace('_', ' ', $record->folder_name)) }}</h2> <!-- Capitalize folder name -->
+                                    </div>
+
+                                    <div class="date-container">
+                                        <span class="date">{{ strtoupper(date('F', mktime(0, 0, 0, $record->month, 1))) }}</span>
+                                        <span class="date">{{ strtoupper($record->year->year) }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="footer-folder-container">
+                                    <div class="type-container">{{ strtoupper($record->folder_type) }} NUMBER</div>
+                                    <div class="others-container mb-2">{{ $record->others }}</div>
+                                    <div class="number-container">{{ $record->number }}</div>
+                                    <div class="sub-date-container mt-3 mb-3">
+                                        <p><b>SUBMISSION DATE:</b> {{ strtoupper(date('F', mktime(0, 0, 0, $record->submission_month, 1))) }}, {{ strtoupper($record->submissionYear->year ?? 'N/A') }}</p>
+                                    </div>
+                                    <div class="remarks-container">{{ $record->remarks }}</div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            @endforeach
 
             {{-- END MODAL --}}
 
@@ -252,7 +162,12 @@
                             <tr>
                                 <td>
                                     <div class="icon-container">
-                                        <!-- Delete Button -->
+                                        <a href="javascript:void(0);" role="button" data-bs-toggle="modal" data-bs-target="#viewRecordModal{{ $record->id }}" type="button">
+                                            <i class="fa-solid fa-eye action-icon view-icon"></i>
+                                        </a>
+                                        <a href="{{ url('admin/records/'. $record->id .'/edit') }}">
+                                            <i class="fa-solid fa-pen-to-square action-icon edit-icon"></i>
+                                        </a>
                                         <form action="{{ url('admin/records/' . $record->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this record?');">
                                             @csrf
                                             @method('DELETE')
@@ -260,14 +175,6 @@
                                                 <i class="fa-solid fa-trash action-icon delete-icon"></i>
                                             </button>
                                         </form>
-                                        <!-- Edit Button -->
-                                        <a href="{{ url('admin/records/'. $record->id .'/edit') }}">
-                                            <i class="fa-solid fa-pen-to-square action-icon edit-icon"></i>
-                                        </a>
-                                        <!-- View Button -->
-                                        <a href="#!">
-                                            <i class="fa-solid fa-eye action-icon view-icon"></i>
-                                        </a>
                                     </div>
                                 </td>
                                 <td>{{ $record->id }}</td>
