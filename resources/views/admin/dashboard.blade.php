@@ -10,7 +10,8 @@
         <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
                 <div class="d-flex align-items-center p-3">
                     <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4 text-center logo-text">ADMIN</a>
-                    <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
+                    <i class="sidebar-toggle fa-solid fa-bars ms-auto fs-5 d-none d-md-block burger"></i>
+                    {{-- <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i> --}}
                 </div>
 
                 <div class="logo-container">
@@ -83,7 +84,7 @@
 
             <!-- start: Summary -->
             <div class="row mb-5">
-                <div class="col-lg-6">
+                <div class="col-lg-6 mb-2">
                     <a href="{{ url('admin/acic') }}" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                         <div>
                             <i class="fa-solid fa-folder summary-icon mb-2"
@@ -124,13 +125,59 @@
             </div>
 
 
-            <div class="d-flex justify-content-end mb-3 mx-5">
+            <div class="d-flex justify-content-end mb-3">
                 <a href="{{ url('admin/records/create') }}" id="acic_add_new_record" class="btn add_record_button" type="button"> Add new record</a>
             </div>
 
+            @foreach ($records as $record)
+                <!-- Modal for viewing record details -->
+                <div class="modal fade" id="viewRecordModal{{ $record->id }}" tabindex="-1" aria-labelledby="viewRecordLabel{{ $record->id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="viewRecordLabel{{ $record->id }}">Record Details</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body text-center">
+                                <div class="head-folder-container mb-4">
+                                    <div class="mb-3 mb-2 status-container {{ $record->status === 'completed' ? 'completed' : 'in-progress' }} ">
+                                        {{ strtoupper(str_replace('_', ' ', $record->status)) }} <!-- Format status -->
+                                    </div>
+
+                                    <div class="folder-name-container">
+                                        <h2>{{ strtoupper(str_replace('_', ' ', $record->folder_name)) }}</h2> <!-- Capitalize folder name -->
+                                    </div>
+
+                                    <div class="date-container">
+                                        <span class="date">{{ strtoupper(date('F', mktime(0, 0, 0, $record->month, 1))) }}</span>
+                                        <span class="date">{{ strtoupper($record->year->year) }}</span>
+                                    </div>
+                                </div>
+
+                                <div class="footer-folder-container">
+                                    <div class="type-container">{{ strtoupper($record->folder_type) }} NUMBER</div>
+                                    <div class="others-container mb-2">{{ $record->others }}</div>
+                                    <div class="number-container">{{ $record->number }}</div>
+                                    <div class="sub-date-container mt-3 mb-3">
+                                        <p><b>SUBMISSION DATE:</b> {{ strtoupper(date('F', mktime(0, 0, 0, $record->submission_month, 1))) }}, {{ strtoupper($record->submissionYear->year ?? 'N/A') }}</p>
+                                    </div>
+                                    <div class="remarks-container">{{ $record->remarks }}</div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+
+
+
             {{-- TABLE START --}}
 
-            <div class="table-container mx-5 mb-5">
+            <div class="table-container mb-5">
                 <table id="table_data" class="table table-striped hover mt-3 table-edit mb-3" style="width:100%">
                     <thead>
                         <tr>
@@ -154,7 +201,12 @@
                             <tr>
                                 <td>
                                     <div class="icon-container">
-                                        <!-- Delete Button -->
+                                        <a href="javascript:void(0);" role="button" data-bs-toggle="modal" data-bs-target="#viewRecordModal{{ $record->id }}" type="button">
+                                            <i class="fa-solid fa-eye action-icon view-icon"></i>
+                                        </a>
+                                        <a href="{{ url('admin/records/'. $record->id .'/edit') }}">
+                                            <i class="fa-solid fa-pen-to-square action-icon edit-icon"></i>
+                                        </a>
                                         <form action="{{ url('admin/records/' . $record->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this record?');">
                                             @csrf
                                             @method('DELETE')
@@ -162,14 +214,6 @@
                                                 <i class="fa-solid fa-trash action-icon delete-icon"></i>
                                             </button>
                                         </form>
-                                        <!-- Edit Button -->
-                                        <a href="{{ url('admin/records/'. $record->id .'/edit') }}">
-                                            <i class="fa-solid fa-pen-to-square action-icon edit-icon"></i>
-                                        </a>
-                                        <!-- View Button -->
-                                        <a href="{{ url('admin/records/show') }}">
-                                            <i class="fa-solid fa-eye action-icon view-icon"></i>
-                                        </a>
                                     </div>
                                 </td>
                                 <td>{{ $record->id }}</td>

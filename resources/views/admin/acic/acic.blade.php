@@ -10,7 +10,7 @@
         <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
                 <div class="d-flex align-items-center p-3">
                     <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4 text-center logo-text">ADMIN</a>
-                    <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
+                    <i class="sidebar-toggle fa-solid fa-bars ms-auto fs-5 d-none d-md-block burger"></i>
                 </div>
 
                 <div class="logo-container">
@@ -227,7 +227,7 @@
             {{-- END MODAL --}}
 
 
-            <div class="table-container mx-5 mb-5">
+            <div class="table-container mb-5">
                 <table id="table_data" class="table table-striped hover mt-3 table-edit mb-3" style="width:100%">
                     <thead>
                         <tr>
@@ -251,7 +251,12 @@
                             <tr>
                                 <td>
                                     <div class="icon-container">
-                                        <!-- Delete Button -->
+                                        <a href="javascript:void(0);" role="button" data-bs-toggle="modal" data-bs-target="#viewRecordModal{{ $record->id }}" type="button">
+                                            <i class="fa-solid fa-eye action-icon view-icon"></i>
+                                        </a>
+                                        <a href="{{ url('admin/records/'. $record->id .'/edit') }}">
+                                            <i class="fa-solid fa-pen-to-square action-icon edit-icon"></i>
+                                        </a>
                                         <form action="{{ url('admin/records/' . $record->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this record?');">
                                             @csrf
                                             @method('DELETE')
@@ -259,14 +264,6 @@
                                                 <i class="fa-solid fa-trash action-icon delete-icon"></i>
                                             </button>
                                         </form>
-                                        <!-- Edit Button -->
-                                        <a href="{{ url('admin/records/'. $record->id .'/edit') }}">
-                                            <i class="fa-solid fa-pen-to-square action-icon edit-icon"></i>
-                                        </a>
-                                        <!-- View Button -->
-                                        <a href="#!">
-                                            <i class="fa-solid fa-eye action-icon view-icon"></i>
-                                        </a>
                                     </div>
                                 </td>
                                 <td>{{ $record->id }}</td>

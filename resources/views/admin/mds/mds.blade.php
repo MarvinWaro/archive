@@ -10,7 +10,7 @@
         <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
                 <div class="d-flex align-items-center p-3">
                     <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4 text-center logo-text">ADMIN</a>
-                    <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
+                    <i class="sidebar-toggle fa-solid fa-bars ms-auto fs-5 d-none d-md-block burger"></i>
                 </div>
 
                 <div class="logo-container">
@@ -228,7 +228,7 @@
             {{-- END MODAL --}}
 
 
-            <div class="table-container mx-5 mb-5">
+            <div class="table-container mb-5">
                 <table id="table_data" class="table table-striped table-hover mt-3 table-edit mb-3" style="width:100%">
                     <thead>
                         <tr>
