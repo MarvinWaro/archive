@@ -1033,6 +1033,10 @@ tbody tr td a{
     text-align: left !important;
 } */
 
+.burger{
+    color: var(--maincolor);
+}
+
 
 .action-icon{
     font-size: 26px;
@@ -1127,6 +1131,8 @@ tbody tr td a{
     color: var(--bs-light) !important;
     background-color: var(--maincolor) !important;
     transition: background-color 0.3s ease, opacity 0.3s ease !important;
+    padding-right: 32px !important;
+    padding-left: 32px !important;
 }
 
 .add_record_button:hover {
@@ -1183,25 +1189,24 @@ tbody tr td a{
 
 /* SHOW */
 
-/* .status-container.completed{
+.status-container.completed {
     background-color: var(--bs-green);
     color: var(--bs-light);
     border-radius: 10px;
     padding: 15px 10px;
-    font-weight: bold;
-    font-size: 20px;
-    letter-spacing: 10px;
-} */
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 5px;
+}
 
-.status-container {
-    display: inline-block; /* Makes the container as wide as the content */
-    padding: 10px 130px; /* Add 20px padding on left and right */
-    background-color: #28a745; /* Example background color for visibility */
-    color: #fff; /* Text color */
-    border-radius: 10px; /* Optional: Add rounded corners */
-    font-weight: bold;
-    font-size: 20px;
-    letter-spacing: 7px;
+.status-container.in-progress {
+    background-color: var(--bs-orange);
+    color: var(--bs-light);
+    border-radius: 10px;
+    padding: 15px 10px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: 5px;
 }
 
 
@@ -1211,12 +1216,13 @@ tbody tr td a{
     font-size: 50px;
 }
 
-.head-folder-container .date-container .date{
-    font-size: 20px;
+.head-folder-container .date-container .date {
+    font-size: 30px;
     font-weight: bold;
     padding: 5px 10px;
     letter-spacing: 5px;
     color: #1d1d1db6;
+    padding: 5px 10px;
 }
 
 .type-container{
@@ -1225,11 +1231,19 @@ tbody tr td a{
     font-size: 25px;
 }
 
+.number-container{
+    font-size: 20px;
+    color: #1d1d1db6;
+}
+
 .others-container{
     font-weight: 500;
     color: #1d1d1db6;
     margin-top: 8px;
+    font-size: 20px;
 }
+
+
 
 
 

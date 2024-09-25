@@ -10,7 +10,7 @@
         <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
                 <div class="d-flex align-items-center p-3">
                     <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4 text-center logo-text">ADMIN</a>
-                    <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i>
+                    <i class="sidebar-toggle fa-solid fa-bars ms-auto fs-5 d-none d-md-block burger"></i>
                 </div>
 
                 <div class="logo-container">
@@ -95,7 +95,7 @@
             --}}
 
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-8 mx-auto">
                     <form id="addRecordForm" action="{{ url('admin/records') }}" method="POST">
                         @csrf
 
