@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-    Admin Edit
+    Admin Edit Record
 @endsection
 
 @section('content')

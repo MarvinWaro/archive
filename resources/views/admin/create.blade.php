@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-    Admin Create
+    Admin Create Record
 @endsection
 
 @section('content')

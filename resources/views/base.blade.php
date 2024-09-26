@@ -39,6 +39,7 @@
 
 
     <title>CHED | @yield('title')</title>
+    
 </head>
 
 <body>
@@ -80,7 +81,7 @@
                     responsive: true,
                     columnDefs: [
                         {
-                            targets: 6, // The "Number" column (7th column, 0-indexed)
+                            targets: 5, // The "Number" column (7th column, 0-indexed)
                             render: function (data, type, row) {
                                 if (type === 'display' && data.length > 7) {
                                     // Truncate the data to 7 characters and append '...'
@@ -90,7 +91,7 @@
                             }
                         },
                         {
-                            targets: 9, // The "Others" column (10th column, 0-indexed)
+                            targets: 8, // The "Others" column (10th column, 0-indexed)
                             render: function (data, type, row) {
                                 if (type === 'display' && data.length > 10) {
                                     // Truncate the data to 10 characters and append '...'
@@ -100,7 +101,7 @@
                             }
                         },
                         {
-                            targets: 10, // The "Remarks" column (11th column, 0-indexed)
+                            targets: 9, // The "Remarks" column (11th column, 0-indexed)
                             render: function (data, type, row) {
                                 if (type === 'display' && data.length > 10) {
                                     // Truncate the data to 10 characters and append '...'
