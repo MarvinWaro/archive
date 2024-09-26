@@ -1135,7 +1135,20 @@ tbody tr td a{
     padding-left: 32px !important;
 }
 
+.icon-button{
+    color: var(--bs-light) !important;
+    background-color: var(--maincolor) !important;
+    transition: background-color 0.3s ease, opacity 0.3s ease !important;
+    padding-right: 32px !important;
+    padding-left: 32px !important;
+}
+
 .add_record_button:hover {
+    background-color: #004080 !important; /* Adjust to a darker shade of --maincolor */
+    opacity: 0.9 !important;
+}
+
+.icon-button:hover {
     background-color: #004080 !important; /* Adjust to a darker shade of --maincolor */
     opacity: 0.9 !important;
 }

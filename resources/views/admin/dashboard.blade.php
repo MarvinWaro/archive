@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-    Admin
+    Admin Dashboard
 @endsection
 
 @section('content')
@@ -124,10 +124,17 @@
                 @endif
             </div>
 
-
-            <div class="d-flex justify-content-end mb-3">
-                <a href="{{ url('admin/records/create') }}" id="acic_add_new_record" class="btn add_record_button" type="button"> Add new record</a>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <a href="{{ route('records.export') }}" id="export" class="btn icon-button me-1" type="button">
+                    <i class="fa-solid fa-file-export button-icon"></i> <span class="ps-2">Export Files</span>
+                </a>
+                <a href="{{ url('admin/records/create') }}" id="acic_add_new_record" class="btn add_record_button" type="button">
+                    <i class="fa-solid fa-plus"></i> <span class="ps-2">Add Record</span>
+                </a>
             </div>
+
+
+            {{-- MODAL --}}
 
             @foreach ($records as $record)
                 <!-- Modal for viewing record details -->
@@ -172,18 +179,15 @@
                 </div>
             @endforeach
 
-
+            {{-- MODAL END --}}
 
 
             {{-- TABLE START --}}
 
             <div class="table-container mb-5">
-                <table id="table_data" class="table table-striped hover mt-3 table-edit mb-3" style="width:100%">
+                <table id="table_data" class="table table-striped table-hover mt-3 table-edit mb-3" style="width:100%">
                     <thead>
                         <tr>
-                            <th>
-                                ACTION
-                            </th>
                             <th class="pe-4 number">ID</th>
                             <th class="pe-4 number" >Year</th>
                             <th>Month</th>
@@ -194,11 +198,30 @@
                             <th>Status</th>
                             <th>Others</th>
                             <th>Remarks</th>
+                            <th>
+                                ACTION
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($records as $record)
                             <tr>
+                                <td>{{ $record->id }}</td>
+                                <td>{{ $record->year->year ?? 'N/A' }}</td>
+                                <td>{{ strtoupper(date('F', mktime(0, 0, 0, $record->month, 1))) }}</td>
+                                <td>{{ strtoupper(str_replace('_', ' ', $record->folder_name)) }}</td>
+                                <td>{{ strtoupper($record->folder_type) }} NUMBER</td>
+                                <td class="table-column-truncate">{{ $record->number }}</td>
+                                <td>
+                                    {{ $record->submissionYear->year ?? 'N/A' }}, {{ strtoupper(date('F', mktime(0, 0, 0, $record->submission_month, 1))) }}
+                                </td>
+                                <td>
+                                    <div class="status {{ $record->status === 'completed' ? 'completed' : 'in-progress' }}">
+                                        {{ strtoupper(str_replace('_', ' ', $record->status)) }} <!-- Format status -->
+                                    </div>
+                                </td>
+                                <td>{{ $record->others }}</td>
+                                <td>{{ $record->remarks }}</td>
                                 <td>
                                     <div class="icon-container">
                                         <a href="javascript:void(0);" role="button" data-bs-toggle="modal" data-bs-target="#viewRecordModal{{ $record->id }}" type="button">
@@ -216,22 +239,6 @@
                                         </form>
                                     </div>
                                 </td>
-                                <td>{{ $record->id }}</td>
-                                <td>{{ $record->year->year ?? 'N/A' }}</td>
-                                <td>{{ strtoupper(date('F', mktime(0, 0, 0, $record->month, 1))) }}</td>
-                                <td>{{ strtoupper(str_replace('_', ' ', $record->folder_name)) }}</td>
-                                <td>{{ $record->folder_type }}</td>
-                                <td class="table-column-truncate">{{ $record->number }}</td>
-                                <td>
-                                    {{ $record->submissionYear->year ?? 'N/A' }}, {{ strtoupper(date('F', mktime(0, 0, 0, $record->submission_month, 1))) }}
-                                </td>
-                                <td>
-                                    <div class="status {{ $record->status === 'completed' ? 'completed' : 'in-progress' }}">
-                                        {{ strtoupper(str_replace('_', ' ', $record->status)) }} <!-- Format status -->
-                                    </div>
-                                </td>
-                                <td>{{ $record->others }}</td>
-                                <td>{{ $record->remarks }}</td>
                             </tr>
                         @endforeach
                     </tbody>

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Year;
 use App\Models\SubmissionYear;
 use App\Models\Record;
+use League\Csv\Writer; // Correct Writer import
+use \SplTempFileObject; // Correct
 
 class RecordController extends Controller
 {
@@ -20,6 +22,66 @@ class RecordController extends Controller
 
         return view("admin.dashboard", compact('records', 'acicCount', 'mdsCount'));
     }
+
+
+    public function exportRecordsToCSV()
+    {
+        $records = Record::with(['year', 'submissionYear'])->get();
+
+        // Create a CSV Writer instance using a temporary file
+        $csv = Writer::createFromFileObject(new \SplTempFileObject());
+
+        // Add the headers (all in uppercase)
+        $csv->insertOne([
+            'ID', 'YEAR', 'MONTH', 'FOLDER NAME', 'FOLDER TYPE',
+            'NUMBER', 'SUBMISSION YEAR', 'SUBMISSION MONTH', 'STATUS', 'OTHERS', 'REMARKS'
+        ]);
+
+        // Add the data
+        foreach ($records as $record) {
+            // Convert month number to month name
+            $monthName = date('F', mktime(0, 0, 0, $record->month, 10)); // Convert month number to full month name
+            $submissionMonthName = date('F', mktime(0, 0, 0, $record->submission_month, 10));
+
+            // Folder name transformations
+            $folderName = strtoupper(str_replace('_', ' ', $record->folder_name));
+
+            // Custom handling for specific folder names like ACIC_151 to ACIC 151
+            $folderNameReplacements = [
+                'ACIC_151' => 'ACIC 151',
+                'ACIC_101' => 'ACIC 101',
+                'ACIC_COSCO' => 'ACIC COSCO',
+                'MDS_151'   => 'MDS 151',
+                'MDS_101'   => 'MDS 101'
+            ];
+
+            if (array_key_exists($record->folder_name, $folderNameReplacements)) {
+                $folderName = $folderNameReplacements[$record->folder_name];
+            }
+
+            // Ensure all other fields are in uppercase
+            $csv->insertOne([
+                $record->id,
+                strtoupper($record->year->year),
+                strtoupper($monthName),
+                $folderName,
+                strtoupper($record->folder_type),
+                strtoupper($record->number),
+                strtoupper($record->submissionYear->year),
+                strtoupper($submissionMonthName),
+                strtoupper($record->status),
+                strtoupper($record->others),
+                strtoupper($record->remarks)
+            ]);
+        }
+
+        // Output the CSV file for download
+        return response((string) $csv)
+            ->header('Content-Type', 'text/csv')
+            ->header('Content-Disposition', 'attachment; filename="records.csv"');
+    }
+
+
 
     public function create() {
         $years = Year::orderBy('year', 'desc')->get(); // Fetch years in descending order
