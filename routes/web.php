@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecordController;
 
+
+
 Route::prefix('admin')->group(function () {
     Route::controller(RecordController::class)->group(function() {
         Route::get('dashboard', 'index'); // View all records
@@ -20,6 +22,9 @@ Route::prefix('admin')->group(function () {
         Route::get('mds', 'mds_records'); // MDS records
 
         Route::get('login','login')->name('');
+        Route::get('register','register')->name('');
+        Route::get('forgot','forgot')->name('');
+        Route::get('reset','reset')->name('');
     });
 });
 
