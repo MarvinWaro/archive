@@ -85,15 +85,6 @@
         <div class="py-4 mt-4">
             <!-- start: Summary -->
 
-            {{-- <div class="d-flex justify-content-end mb-3 mx-5">
-                <!-- Button to trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addNewRecordModal">
-                    Add New Acic Record
-                </button>
-            </div>
-
-            --}}
-
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <form id="addRecordForm" action="{{ url('admin/records') }}" method="POST">
@@ -104,89 +95,126 @@
 
                             <div class="col-lg-6 mb-3">
                                 <label for="yearSelect" class="form-label required">Year</label>
-                                <select id="yearSelect" name="year_id" class="form-select" required>
+                                <select id="yearSelect" name="year_id" class="form-select">
                                     <option value="">Select Folder Year</option>
                                     @foreach ($years as $item)
-                                        <option value="{{ $item->id }}">{{ $item->year }}</option>
+                                        <option value="{{ $item->id }}" {{ old('year_id') == $item->id ? 'selected' : '' }}>
+                                            {{ $item->year }}
+                                        </option>
                                     @endforeach
                                 </select>
+                                @error('year_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="col-lg-6 mb-3">
                                 <label for="monthSelect" class="form-label required">Month</label>
-                                <select id="monthSelect" name="month" class="form-select" required>
+                                <select id="monthSelect" name="month" class="form-select">
                                     <option value="">Select Month</option>
                                     @foreach (range(1, 12) as $month)
-                                        <option value="{{ str_pad($month, 2, '0', STR_PAD_LEFT) }}">{{ date('F', mktime(0, 0, 0, $month, 1)) }}</option>
+                                        <option value="{{ str_pad($month, 2, '0', STR_PAD_LEFT) }}" {{ old('month') == str_pad($month, 2, '0', STR_PAD_LEFT) ? 'selected' : '' }}>
+                                            {{ date('F', mktime(0, 0, 0, $month, 1)) }}
+                                        </option>
                                     @endforeach
                                 </select>
+                                @error('month')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="mb-3">
                                 <label for="folder_name_select" class="form-label required">Folder Name</label>
-                                <select id="folder_name_select" name="folder_name" class="form-select" required>
+                                <select id="folder_name_select" name="folder_name" class="form-select">
                                     <option value="">Select Folder Name</option>
-                                    <option value="acic_151">ACIC 151</option>
-                                    <option value="acic_101">ACIC 101</option>
-                                    <option value="acic_cosco">ACIC COSCO</option>
-                                    <option value="mds_151">MDS 151</option>
-                                    <option value="mds_101">MDS 101</option>
+                                    <option value="acic_151" {{ old('folder_name') == 'acic_151' ? 'selected' : '' }}>ACIC 151</option>
+                                    <option value="acic_101" {{ old('folder_name') == 'acic_101' ? 'selected' : '' }}>ACIC 101</option>
+                                    <option value="acic_cosco" {{ old('folder_name') == 'acic_cosco' ? 'selected' : '' }}>ACIC COSCO</option>
+                                    <option value="mds_151" {{ old('folder_name') == 'mds_151' ? 'selected' : '' }}>MDS 151</option>
+                                    <option value="mds_101" {{ old('folder_name') == 'mds_101' ? 'selected' : '' }}>MDS 101</option>
                                 </select>
+                                @error('folder_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
+
+                            <!-- Continue with other fields similarly... -->
 
                             <div class="col-lg-4 mb-3">
                                 <label for="folder_number_select" class="form-label required">Folder Type</label>
-                                <select id="folder_number_select" name="folder_type" class="form-select" required>
+                                <select id="folder_number_select" name="folder_type" class="form-select">
                                     <option value="">Select Folder Type</option>
-                                    <option value="check">Check Number</option>
-                                    <option value="acic">Acic Number</option>
+                                    <option value="check" {{ old('folder_type') == 'check' ? 'selected' : '' }}>Check Number</option>
+                                    <option value="acic" {{ old('folder_type') == 'acic' ? 'selected' : '' }}>Acic Number</option>
                                 </select>
+                                @error('folder_type')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="col-lg-8 mb-3">
                                 <label for="text_num" class="form-label required">Number</label>
-                                <textarea id="text_num" name="number" cols="30" rows="4" class="form-control" placeholder="Please Enter Acic / Check Number Here" required></textarea>
+                                <textarea id="text_num" name="number" cols="30" rows="4" class="form-control" placeholder="Please Enter Acic / Check Number Here" >{{ old('number') }}</textarea>
+                                @error('number')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <h6 class="heading-form">Submission Date</h6>
 
                             <div class="col-lg-6 mb-3">
                                 <label for="submission_year_select" class="form-label required">Submission Year</label>
-                                <select id="submission_year_select" name="submission_year_id" class="form-select" required>
+                                <select id="submission_year_select" name="submission_year_id" class="form-select">
                                     <option value="">Select Submission Year</option>
                                     @foreach ($submission_years as $item)
-                                        <option value="{{ $item->id }}">{{ $item->year }}</option>
+                                        <option value="{{ $item->id }}" {{ old('submission_year_id') == $item->id ? 'selected' : '' }}>
+                                            {{ $item->year }}
+                                        </option>
                                     @endforeach
                                 </select>
+                                @error('submission_year_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="col-lg-6 mb-3">
                                 <label for="submission_month_select" class="form-label required">Submission Month</label>
-                                <select id="submission_month_select" name="submission_month" class="form-select" required>
+                                <select id="submission_month_select" name="submission_month" class="form-select" >
                                     <option value="">Select Month</option>
                                     @foreach (range(1, 12) as $month)
-                                        <option value="{{ str_pad($month, 2, '0', STR_PAD_LEFT) }}">{{ date('F', mktime(0, 0, 0, $month, 1)) }}</option>
+                                        <option value="{{ str_pad($month, 2, '0', STR_PAD_LEFT) }}" {{ old('submission_month') == str_pad($month, 2, '0', STR_PAD_LEFT) ? 'selected' : '' }}>
+                                            {{ date('F', mktime(0, 0, 0, $month, 1)) }}
+                                        </option>
                                     @endforeach
                                 </select>
+                                @error('submission_month')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="col-lg-6 mb-3">
                                 <label for="status" class="form-label required">Status</label>
-                                <select id="status" name="status" class="form-select" required>
+                                <select id="status" name="status" class="form-select" >
                                     <option value="">Select Status</option>
-                                    <option value="in_progress">In-Progress</option>
-                                    <option value="completed">Completed</option>
+                                    <option value="in_progress" {{ old('status') == 'in_progress' ? 'selected' : '' }}>In-Progress</option>
+                                    <option value="completed" {{ old('status') == 'completed' ? 'selected' : '' }}>Completed</option>
                                 </select>
+                                @error('status')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="col-lg-6 mb-3">
                                 <label for="others" class="form-label required">Others</label>
-                                <input type="text" name="others" id="others" class="form-control" required>
+                                <input type="text" name="others" id="others" class="form-control" value="{{ old('others') }}" >
+                                @error('others')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="mb-3">
                                 <label for="remarks" class="form-label">Remarks</label>
-                                <textarea id="remarks" name="remarks" cols="30" rows="4" class="form-control" placeholder="Enter your remarks or comments here"></textarea>
+                                <textarea id="remarks" name="remarks" cols="30" rows="4" class="form-control" placeholder="Enter your remarks or comments here">{{ old('remarks') }}</textarea>
                             </div>
 
                             <div class="d-flex flex-column flex-md-row justify-content-between">
@@ -197,6 +225,7 @@
                     </form>
                 </div>
             </div>
+
 
 
 
