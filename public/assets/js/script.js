@@ -63,6 +63,69 @@ setTimeout(function () {
 }, 3000);
 
 
+// dropdown year and month create
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    const yearSelect = document.getElementById('yearSelect');
+    const monthSelect = document.getElementById('monthSelect');
+    const subYearSelect = document.getElementById('submission_year_select');
+    const subMonthSelect = document.getElementById('submission_month_select');
+
+    function updateSubmissionYearOptions() {
+        const selectedYear = parseInt(yearSelect.value);
+
+        for (let option of subYearSelect.options) {
+            option.disabled = false;
+            option.hidden = false;
+        }
+
+        for (let option of subYearSelect.options) {
+            const year = parseInt(option.value);
+            if (year < selectedYear) {
+                option.disabled = true;
+                option.hidden = true;
+            }
+        }
+    }
+
+    function updateSubmissionMonthOptions() {
+        const selectedYear = parseInt(yearSelect.value);
+        const selectedMonth = parseInt(monthSelect.value);
+        const selectedSubYear = parseInt(subYearSelect.value);
+
+        for (let option of subMonthSelect.options) {
+            option.disabled = false;
+            option.hidden = false;
+        }
+
+        // If submission year is the same as folder year, restrict based on the selected folder month
+        if (selectedSubYear === selectedYear) {
+            for (let option of subMonthSelect.options) {
+                const month = parseInt(option.value);
+                if (month < selectedMonth) {
+                    option.disabled = true;
+                    option.hidden = true;
+                }
+            }
+        }
+    }
+
+    // Update submission month when submission year or folder year/month changes
+    yearSelect.addEventListener('change', () => {
+        updateSubmissionYearOptions();
+        updateSubmissionMonthOptions();
+    });
+
+    monthSelect.addEventListener('change', updateSubmissionMonthOptions);
+    subYearSelect.addEventListener('change', updateSubmissionMonthOptions);
+
+    // Initial run
+    updateSubmissionYearOptions();
+    updateSubmissionMonthOptions();
+});
+
+
 
 
 
