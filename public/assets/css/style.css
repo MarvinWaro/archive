@@ -985,6 +985,11 @@ form .error {
 
 /* CHED */
 
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease; /* Adjust the duration to match your needs */
+}
+
 .logo-container {
     display: flex;
     justify-content: center; /* centers horizontally */

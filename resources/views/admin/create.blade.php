@@ -9,7 +9,7 @@
         <!-- start: Sidebar -->
         <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
                 <div class="d-flex align-items-center p-3">
-                    <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4 text-center logo-text">ADMIN</a>
+                    <a href="{{ url('admin/dashboard') }}" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4 text-center logo-text">ADMIN</a>
                     <i class="sidebar-toggle fa-solid fa-bars ms-auto fs-5 d-none d-md-block burger"></i>
                 </div>
 
@@ -73,10 +73,10 @@
                     <img class="navbar-profile-image" src="{{ asset('assets/img/ched_logo.png') }}" alt="Image" />
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="profile.php"><i class="ri-user-settings-line me-2"></i>Profile</a></li>
-                    <li><a class="dropdown-item" href="settings.php"><i class="ri-settings-3-line me-2"></i>Settings</a></li>
+                    <li><a class="dropdown-item" href="profile.php"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
+                    <li><a class="dropdown-item" href="settings.php"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
                     <hr class="w-100">
-                    <li><a class="dropdown-item" href="../login/logout.php"><i class="ri-logout-box-line me-2"></i>Logout</a></li>
+                    <li><a class="dropdown-item" href="../login/logout.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
                 </ul>
             </div>
         </nav>

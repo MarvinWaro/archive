@@ -14,14 +14,18 @@ class RecordController extends Controller
     public function index() {
         // Get the records with eager loading of year and submission year
         $records = Record::with(['year', 'submissionYear'])->get();
-
+        // Count ACIC folders
         $acicCount = Record::where('folder_name', 'LIKE', 'ACIC%')->count();
-        // Get the count of MDS folders based on folder_name
+        // Count MDS folders
         $mdsCount = Record::where('folder_name', 'LIKE', 'MDS%')->count();
+        // Count completed folders
+        $completedCount = Record::where('status', 'completed')->count();
+        // Count in-progress folders
+        $inProgressCount = Record::where('status', 'in_progress')->count();
         // Pass the records and counts to the view
-
-        return view("admin.dashboard", compact('records', 'acicCount', 'mdsCount'));
+        return view("admin.dashboard", compact('records', 'acicCount', 'mdsCount', 'completedCount', 'inProgressCount'));
     }
+
 
 
     public function exportRecordsToCSV()
