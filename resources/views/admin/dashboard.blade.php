@@ -9,7 +9,7 @@
         <!-- start: Sidebar -->
         <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
                 <div class="d-flex align-items-center p-3">
-                    <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4 text-center logo-text">ADMIN</a>
+                    <a href="{{ url('admin/dashboard') }}" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4 text-center logo-text">ADMIN</a>
                     <i class="sidebar-toggle fa-solid fa-bars ms-auto fs-5 d-none d-md-block burger"></i>
                     {{-- <i class="sidebar-toggle ri-arrow-left-circle-line ms-auto fs-5 d-none d-md-block"></i> --}}
                 </div>
@@ -70,10 +70,10 @@
                     <img class="navbar-profile-image" src="{{ asset('assets/img/ched_logo.png') }}" alt="Image" />
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="profile.php"><i class="ri-user-settings-line me-2"></i>Profile</a></li>
-                    <li><a class="dropdown-item" href="settings.php"><i class="ri-settings-3-line me-2"></i>Settings</a></li>
+                    <li><a class="dropdown-item" href="profile.php"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
+                    <li><a class="dropdown-item" href="settings.php"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
                     <hr class="w-100">
-                    <li><a class="dropdown-item" href="../login/logout.php"><i class="ri-logout-box-line me-2"></i>Logout</a></li>
+                    <li><a class="dropdown-item" href="../login/logout.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -84,7 +84,8 @@
 
             <!-- start: Summary -->
             <div class="row mb-5">
-                <div class="col-lg-6 mb-2">
+                <!-- ACIC Folder -->
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
                     <a href="{{ url('admin/acic') }}" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                         <div>
                             <i class="fa-solid fa-folder summary-icon mb-2"
@@ -94,29 +95,54 @@
                         <h4>{{ $acicCount }}</h4> <!-- Display the dynamic ACIC count -->
                     </a>
                 </div>
-                <div class="col-lg-6">
+
+                <!-- MDS Folder -->
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
                     <a href="{{ url('admin/mds') }}" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
                         <div>
                             <i class="fa-solid fa-folder summary-icon mb-2"
-                                style="display: flex; justify-content: center; align-items: center; width: 65px; height: 65px; border-radius: 50%; background-color: #ffc107; color: white; font-size: 24px;"></i>
+                                style="display: flex; justify-content: center; align-items: center; width: 65px; height: 65px; border-radius: 50%; background-color: #d63384; color: white; font-size: 24px;"></i>
                             <div>TOTAL MDS FOLDERS</div>
                         </div>
                         <h4>{{ $mdsCount }}</h4> <!-- Display the dynamic MDS count -->
                     </a>
                 </div>
-            </div>
 
+                <!-- ACIC Completed Folder -->
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <a href="#!" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                        <div>
+                            <i class="fa-solid fa-circle-check summary-icon mb-2"
+                                style="display: flex; justify-content: center; align-items: center; width: 65px; height: 65px; border-radius: 50%; background-color: #198754; color: white; font-size: 24px;"></i>
+                            <div>TOTAL COMPLETED FOLDERS</div>
+                        </div>
+                        <h4>{{ $completedCount }}</h4> <!-- Display the dynamic completed count -->
+                    </a>
+                </div>
+
+                <!-- In-progress Folders -->
+                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
+                    <a href="#!" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                        <div>
+                            <i class="fa-solid fa-spinner summary-icon mb-2"
+                                style="display: flex; justify-content: center; align-items: center; width: 65px; height: 65px; border-radius: 50%; background-color: #ffc107; color: white; font-size: 24px;"></i>
+                            <div>TOTAL IN-PROGRESS FOLDERS</div>
+                        </div>
+                        <h4>{{ $inProgressCount }}</h4> <!-- Display the dynamic in-progress count -->
+                    </a>
+                </div>
+            </div>
 
             {{-- Alerts --}}
 
-            <div class="alert-wrapper">
+            <div class="alert-wrapper" id="success">
                 @if (session('message'))
                     <div class="alert alert-success alert-position" role="alert" id="success-alert">
                         {{ session('message') }}
                     </div>
                 @endif
             </div>
-            <div class="alert-wrapper">
+            <div class="alert-wrapper" id="danger">
                 @if (session('deleted'))
                     <div class="alert alert-danger alert-position" role="alert" id="danger-alert">
                         {{ session('deleted') }}

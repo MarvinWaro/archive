@@ -35,6 +35,33 @@ $(document).ready(function() {
     }
 })
 
+// For Fade out Alert
+
+// Function to close alert with fade effect
+function closeAlertWithFade(alertId) {
+    var alert = document.getElementById(alertId);
+    if (alert) {
+        // Add fade-out class
+        alert.classList.add('fade-out');
+
+        // Wait for the fade-out animation to complete before closing
+        setTimeout(function () {
+            var bsAlert = new bootstrap.Alert(alert);
+            bsAlert.close();
+        }, 500); // Adjust to match your fade duration
+    }
+}
+
+// Close success alert after 3 seconds
+setTimeout(function () {
+    closeAlertWithFade('success');
+}, 3000);
+
+// Close danger alert after 3 seconds
+setTimeout(function () {
+    closeAlertWithFade('danger');
+}, 3000);
+
 
 
 

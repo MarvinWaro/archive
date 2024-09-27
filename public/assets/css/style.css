@@ -358,25 +358,25 @@ nav {
     color: var(--maincolor) !important;
 }
 .summary-indigo:hover .summary-icon {
-    color: var(--bs-green) !important;
+    color: var(--maincolor) !important;
 }
 .summary-danger:hover .summary-icon {
-    color: var(--bs-danger) !important;
+    color: var(--maincolor) !important;
 }
 .summary-info:hover .summary-icon {
-    color: var(--bs-info) !important;
+    color: var(--maincolor) !important;
 }
 .summary-primary:hover {
     background-color: var(--maincolor) !important;
 }
 .summary-indigo:hover {
-    background-color: var(--bs-green) !important;
+    background-color: var(--maincolor) !important
 }
 .summary-danger:hover {
-    background-color: var(--bs-danger) !important;
+    background-color: var(--maincolor) !important
 }
 .summary-info:hover {
-    background-color: var(--bs-info) !important;
+    background-color: var(--maincolor) !important
 }
 /* end: Suummary */
 /* end: Main */
@@ -984,6 +984,11 @@ form .error {
 
 
 /* CHED */
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease; /* Adjust the duration to match your needs */
+}
 
 .logo-container {
     display: flex;

@@ -9,7 +9,7 @@
         <!-- start: Sidebar -->
         <div class="sidebar position-fixed top-0 bottom-0 bg-white border-end">
                 <div class="d-flex align-items-center p-3">
-                    <a href="#" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4 text-center logo-text">ADMIN</a>
+                    <a href="{{ url('admin/dashboard') }}" class="sidebar-logo text-uppercase fw-bold text-decoration-none text-indigo fs-4 text-center logo-text">ADMIN</a>
                     <i class="sidebar-toggle fa-solid fa-bars ms-auto fs-5 d-none d-md-block burger"></i>
                 </div>
 
@@ -73,10 +73,10 @@
                     <img class="navbar-profile-image" src="{{ asset('assets/img/ched_logo.png') }}" alt="Image" />
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="profile.php"><i class="ri-user-settings-line me-2"></i>Profile</a></li>
-                    <li><a class="dropdown-item" href="settings.php"><i class="ri-settings-3-line me-2"></i>Settings</a></li>
+                    <li><a class="dropdown-item" href="profile.php"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
+                    <li><a class="dropdown-item" href="settings.php"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
                     <hr class="w-100">
-                    <li><a class="dropdown-item" href="../login/logout.php"><i class="ri-logout-box-line me-2"></i>Logout</a></li>
+                    <li><a class="dropdown-item" href="../login/logout.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -95,29 +95,38 @@
                         <div class="row mx-3">
                             <h6 class="heading-form">Folder Year and Month</h6>
 
+                            <!-- Folder Year -->
                             <div class="col-lg-6 mb-3">
                                 <label for="yearSelect" class="form-label required">Year</label>
-                                <select id="yearSelect" name="year_id" class="form-select" required>
+                                <select id="yearSelect" name="year_id" class="form-select">
                                     <option value="">Select Folder Year</option>
                                     @foreach ($years as $item)
                                         <option value="{{ $item->id }}" {{ $item->id == $record->year_id ? 'selected' : '' }}>{{ $item->year }}</option>
                                     @endforeach
                                 </select>
+                                @error('year_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
+                            <!-- Folder Month -->
                             <div class="col-lg-6 mb-3">
                                 <label for="monthSelect" class="form-label required">Month</label>
-                                <select id="monthSelect" name="month" class="form-select" required>
+                                <select id="monthSelect" name="month" class="form-select">
                                     <option value="">Select Month</option>
                                     @foreach (range(1, 12) as $month)
                                         <option value="{{ str_pad($month, 2, '0', STR_PAD_LEFT) }}" {{ str_pad($month, 2, '0', STR_PAD_LEFT) == $record->month ? 'selected' : '' }}>{{ date('F', mktime(0, 0, 0, $month, 1)) }}</option>
                                     @endforeach
                                 </select>
+                                @error('month')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
+                            <!-- Folder Name -->
                             <div class="mb-3">
                                 <label for="folder_name_select" class="form-label required">Folder Name</label>
-                                <select id="folder_name_select" name="folder_name" class="form-select" required>
+                                <select id="folder_name_select" name="folder_name" class="form-select">
                                     <option value="">Select Folder Name</option>
                                     <option value="acic_151" {{ $record->folder_name == 'acic_151' ? 'selected' : '' }}>ACIC 151</option>
                                     <option value="acic_101" {{ $record->folder_name == 'acic_101' ? 'selected' : '' }}>ACIC 101</option>
@@ -125,63 +134,91 @@
                                     <option value="mds_151" {{ $record->folder_name == 'mds_151' ? 'selected' : '' }}>MDS 151</option>
                                     <option value="mds_101" {{ $record->folder_name == 'mds_101' ? 'selected' : '' }}>MDS 101</option>
                                 </select>
+                                @error('folder_name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
+                            <!-- Folder Type -->
                             <div class="col-lg-4 mb-3">
                                 <label for="folder_number_select" class="form-label required">Folder Type</label>
-                                <select id="folder_number_select" name="folder_type" class="form-select" required>
+                                <select id="folder_number_select" name="folder_type" class="form-select">
                                     <option value="">Select Folder Type</option>
                                     <option value="check" {{ $record->folder_type == 'check' ? 'selected' : '' }}>Check Number</option>
                                     <option value="acic" {{ $record->folder_type == 'acic' ? 'selected' : '' }}>Acic Number</option>
                                 </select>
+                                @error('folder_type')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
+                            <!-- Number -->
                             <div class="col-lg-8 mb-3">
                                 <label for="text_num" class="form-label required">Number</label>
-                                <textarea id="text_num" name="number" cols="30" rows="4" class="form-control" placeholder="Please Enter Acic / Check Number Here" required>{{ $record->number }}</textarea>
+                                <textarea id="text_num" name="number" cols="30" rows="4" class="form-control" placeholder="Please Enter Acic / Check Number Here">{{ $record->number }}</textarea>
+                                @error('number')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
+                            <!-- Submission Year and Month -->
                             <h6 class="heading-form">Submission Date</h6>
 
                             <div class="col-lg-6 mb-3">
                                 <label for="submission_year_select" class="form-label required">Submission Year</label>
-                                <select id="submission_year_select" name="submission_year_id" class="form-select" required>
+                                <select id="submission_year_select" name="submission_year_id" class="form-select">
                                     <option value="">Select Submission Year</option>
                                     @foreach ($submission_years as $item)
                                         <option value="{{ $item->id }}" {{ $item->id == $record->submission_year_id ? 'selected' : '' }}>{{ $item->year }}</option>
                                     @endforeach
                                 </select>
+                                @error('submission_year_id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="col-lg-6 mb-3">
                                 <label for="submission_month_select" class="form-label required">Submission Month</label>
-                                <select id="submission_month_select" name="submission_month" class="form-select" required>
+                                <select id="submission_month_select" name="submission_month" class="form-select">
                                     <option value="">Select Month</option>
                                     @foreach (range(1, 12) as $month)
                                         <option value="{{ str_pad($month, 2, '0', STR_PAD_LEFT) }}" {{ str_pad($month, 2, '0', STR_PAD_LEFT) == $record->submission_month ? 'selected' : '' }}>{{ date('F', mktime(0, 0, 0, $month, 1)) }}</option>
                                     @endforeach
                                 </select>
+                                @error('submission_month')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
+                            <!-- Status -->
                             <div class="col-lg-6 mb-3">
                                 <label for="status" class="form-label required">Status</label>
-                                <select id="status" name="status" class="form-select" required>
+                                <select id="status" name="status" class="form-select">
                                     <option value="">Select Status</option>
                                     <option value="in_progress" {{ $record->status == 'in_progress' ? 'selected' : '' }}>In-Progress</option>
                                     <option value="completed" {{ $record->status == 'completed' ? 'selected' : '' }}>Completed</option>
                                 </select>
+                                @error('status')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
+                            <!-- Others -->
                             <div class="col-lg-6 mb-3">
                                 <label for="others" class="form-label required">Others</label>
-                                <input type="text" name="others" id="others" class="form-control" value="{{ $record->others }}" required>
+                                <input type="text" name="others" id="others" class="form-control" value="{{ $record->others }}">
+                                @error('others')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
+                            <!-- Remarks -->
                             <div class="mb-3">
                                 <label for="remarks" class="form-label">Remarks</label>
                                 <textarea id="remarks" name="remarks" cols="30" rows="4" class="form-control" placeholder="Enter your remarks or comments here">{{ $record->remarks }}</textarea>
                             </div>
 
+                            <!-- Form Buttons -->
                             <div class="d-flex flex-column flex-md-row justify-content-between">
                                 <a href="{{ url('admin/dashboard') }}" type="button" class="btn btn-secondary w-100 w-md-50 me-0 me-md-2 mb-2 mb-md-0 p-2">Back</a>
                                 <button type="submit" id="updateRecord" class="btn btn-success w-100 w-md-50 ms-0 ms-md-2 p-2">Update Record</button>
@@ -190,6 +227,7 @@
                     </form>
                 </div>
             </div>
+
 
 
 
