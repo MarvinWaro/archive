@@ -196,4 +196,12 @@ class RecordController extends Controller
         return view("admin.mds.mds", compact('mds_records'));
     }
 
+
+    // LOGIN
+
+    public function login(){
+        return view('admin.auth.login');
+    }
+
+
 }

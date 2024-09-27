@@ -18,6 +18,8 @@ Route::prefix('admin')->group(function () {
 
         Route::get('acic', 'acic_records')->name('acicLoad'); // ACIC records
         Route::get('mds', 'mds_records'); // MDS records
+
+        Route::get('login','login')->name('');
     });
 });
 
