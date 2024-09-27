@@ -1163,7 +1163,7 @@ tbody tr td a{
 }
 
 .ched-img-bg {
-    background-image: linear-gradient(rgb(0 0 0 / 23%), rgb(17 15 107)), url(/assets/img/ched_building.jpg);
+    background-image: linear-gradient(rgb(3 1 28 / 61%), rgb(4 1 83)), url(/assets/img/ched_building.jpg);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

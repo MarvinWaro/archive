@@ -197,10 +197,22 @@ class RecordController extends Controller
     }
 
 
-    // LOGIN
+    // AUTH
 
     public function login(){
         return view('admin.auth.login');
+    }
+
+    public function register(){
+        return view('admin.auth.register');
+    }
+
+    public function forgot(){
+        return view('admin.auth.forgot');
+    }
+
+    public function reset(){
+        return view('admin.auth.reset');
     }
 
 

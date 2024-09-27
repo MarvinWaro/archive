@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('title')
-    Admin Login
+    Admin Reset Password
 @endsection
 
 @section('content')
@@ -40,24 +40,23 @@
                 <br>
             </div>
 
-            <h4 class="text-center text-heading mb-4 mt-2">Admin Login</h4>
+            <h4 class="text-center text-heading mb-4 mt-2">Reset your password</h4>
 
             <!-- Login Form -->
             <form action="#">
                 <div class="mb-3">
-                    <label for="email" class="form-label text-black label-custom">Email</label>
-                    <input type="email" class="form-control input-custom" id="email" placeholder="testuser@ched.gov.ph" required>
+                    <label for="new-password" class="form-label text-black label-custom">New Password</label>
+                    <input type="password" class="form-control input-custom" id="new-password" name="new-passsword" placeholder="**********" required>
                 </div>
                 <div class="mb-3">
-                    <label for="password" class="form-label text-black label-custom">Password</label>
-                    <input type="password" class="form-control input-custom" id="password" placeholder="**********" required>
+                    <label for="new-password" class="form-label text-black label-custom">Re-enter new password</label>
+                    <input type="password" class="form-control input-custom" id="new-password" name="new-passsword" placeholder="**********" required>
                 </div>
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary button-custom">Login</button>
+                    <button type="submit" class="btn btn-primary button-custom">Submit</button>
                 </div>
-                <div class="d-flex justify-content-between align-items-center">
-                    <p class="text-center mt-3"><a href="{{ url('admin/forgot') }}" class="login-link">Forgot Password</a></p>
-                    <p class="text-center mt-3"><a href="{{ url('admin/register') }}" class="login-link">Register here</a></p>
+                <div class="d-flex justify-content-end align-items-center">
+                    <p class="text-center mt-3"><a href="{{ url('admin/login') }}" class="login-link">Login Here</a></p>
                 </div>
             </form>
         </div>
