@@ -92,7 +92,7 @@
                             }
                         },
                         {
-                            targets: 8, // The "Others" column (10th column, 0-indexed)
+                            targets: 7, // The "Others" column (10th column, 0-indexed)
                             render: function (data, type, row) {
                                 if (type === 'display' && data.length > 10) {
                                     // Truncate the data to 10 characters and append '...'
@@ -102,7 +102,7 @@
                             }
                         },
                         {
-                            targets: 9, // The "Remarks" column (11th column, 0-indexed)
+                            targets: 8, // The "Remarks" column (11th column, 0-indexed)
                             render: function (data, type, row) {
                                 if (type === 'display' && data.length > 10) {
                                     // Truncate the data to 10 characters and append '...'
