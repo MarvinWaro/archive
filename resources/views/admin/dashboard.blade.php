@@ -221,9 +221,9 @@
                             <th>Folder Type</th>
                             <th>Number</th> <!-- Column to truncate -->
                             <th>Submission Date</th>
-                            <th>Status</th>
                             <th>Others</th>
                             <th>Remarks</th>
+                            <th>Status</th>
                             <th>
                                 ACTION
                             </th>
@@ -241,13 +241,13 @@
                                 <td>
                                     {{ $record->submissionYear->year ?? 'N/A' }}, {{ strtoupper(date('F', mktime(0, 0, 0, $record->submission_month, 1))) }}
                                 </td>
+                                <td>{{ $record->others }}</td>
+                                <td>{{ $record->remarks }}</td>
                                 <td>
                                     <div class="status {{ $record->status === 'completed' ? 'completed' : 'in-progress' }}">
                                         {{ strtoupper(str_replace('_', ' ', $record->status)) }} <!-- Format status -->
                                     </div>
                                 </td>
-                                <td>{{ $record->others }}</td>
-                                <td>{{ $record->remarks }}</td>
                                 <td>
                                     <div class="icon-container">
                                         <a href="javascript:void(0);" role="button" data-bs-toggle="modal" data-bs-target="#viewRecordModal{{ $record->id }}" type="button">
