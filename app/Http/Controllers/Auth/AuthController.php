@@ -3,19 +3,23 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Validator; 
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User; // Import User Model
+use Illuminate\Support\Facades\Log; // Import logging if not already imported
 
 class AuthController extends Controller
 {
+    // Show the registration form
     public function showRegistrationForm()
     {
-        return view('admin.auth.register'); // Create this view
+        return view('admin.auth.register'); // Ensure this view exists
     }
 
+    // Handle registration
     public function register(Request $request)
     {
         // Validate the request
@@ -37,7 +41,44 @@ class AuthController extends Controller
         ]);
 
         // Redirect or return a success message
-        return redirect('login')->with('success', 'Registration successful! Please log in.');
+        return redirect('admin/login')->with('success', 'Registration successful! Please log in.');
+    }
+
+    // Show login form
+    public function showLoginForm()
+    {
+        return view('admin.auth.login'); // Ensure this view exists
+    }
+
+    // Handle login
+    public function login(Request $request)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        // Attempt to authenticate the user
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            // Authentication passed
+            // Log the successful attempt
+            Log::info('User logged in: ' . Auth::user()->email);
+
+            // Redirect to the intended route or dashboard
+            return redirect()->route('dashboard');
+        } else {
+            // Log failed attempt for debugging
+            Log::warning('Login failed for: ' . $request->email);
+            return back()->withErrors(['message' => 'Invalid credentials']);
+        }
+    }
+
+    // Handle logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        return redirect('admin/login');
     }
 
     // Show forget password form
@@ -46,6 +87,7 @@ class AuthController extends Controller
         return view('admin.auth.forgot'); // Ensure this view exists
     }
 
+    // Handle sending the reset password link
     public function sendResetLink(Request $request)
     {
         $request->validate(['email' => 'required|email']);
@@ -57,11 +99,13 @@ class AuthController extends Controller
             : back()->withErrors(['email' => trans($response)]);
     }
 
+    // Show reset password form
     public function showResetPasswordForm($token)
     {
         return view('admin.auth.reset', ['token' => $token]); // Ensure this view exists
     }
 
+    // Handle reset password
     public function resetPassword(Request $request)
     {
         $request->validate([
@@ -81,9 +125,4 @@ class AuthController extends Controller
             ? redirect()->route('login')->with('status', __($status))
             : back()->withErrors(['email' => [__($status)]]);
     }
-
-
-
-
-
 }
