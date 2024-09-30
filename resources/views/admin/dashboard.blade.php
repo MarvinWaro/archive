@@ -151,10 +151,10 @@
             </div>
 
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <a href="{{ route('records.export') }}" id="export" class="btn icon-button me-1" type="button">
+                <a href="{{ route('records.export') }}" id="export" class="btn41-43 btn-41" type="button">
                     <i class="fa-solid fa-file-export button-icon"></i> <span class="ps-2">Export Files</span>
                 </a>
-                <a href="{{ url('admin/records/create') }}" id="acic_add_new_record" class="btn add_record_button" type="button">
+                <a href="{{ url('admin/records/create') }}" id="acic_add_new_record" class="btn41-43 btn-41" type="button">
                     <i class="fa-solid fa-plus"></i> <span class="ps-2">Add Record</span>
                 </a>
             </div>

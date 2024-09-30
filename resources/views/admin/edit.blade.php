@@ -219,9 +219,9 @@
                             </div>
 
                             <!-- Form Buttons -->
-                            <div class="d-flex flex-column flex-md-row justify-content-between">
-                                <a href="{{ url('admin/dashboard') }}" type="button" class="btn btn-secondary w-100 w-md-50 me-0 me-md-2 mb-2 mb-md-0 p-2">Back</a>
-                                <button type="submit" id="updateRecord" class="btn btn-success w-100 w-md-50 ms-0 ms-md-2 p-2">Update Record</button>
+                            <div class="d-flex flex-column flex-md-row justify-content-between text-center">
+                                <a href="{{ url('admin/dashboard') }}" type="button" class="back btn41-43 btn-41 w-100 w-md-50 me-0 me-md-2 mb-2 mb-md-0 p-2">Back</a>
+                                <button type="submit" id="updateRecord" class="submitting btn41-43 btn-41 w-100 w-md-50 ms-0 ms-md-2 p-2">Update Record</button>
                             </div>
                         </div>
                     </form>
