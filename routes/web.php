@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecordController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\AuthController;
 
 

@@ -73,7 +73,12 @@
                     <li><a class="dropdown-item" href="{{ url('admin/profile') }}"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
                     <li><a class="dropdown-item" href="#!"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
                     <hr class="w-100">
-                    <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}">
+                            <i class="fa-solid fa-right-from-bracket me-2"></i>Logout
+                        </a>
+                    </li>
+
                 </ul>
             </div>
         </nav>
@@ -135,20 +140,54 @@
 
             {{-- Alerts --}}
 
-            <div class="alert-wrapper" id="success">
-                @if (session('message'))
-                    <div class="alert alert-success alert-position" role="alert" id="success-alert">
-                        {{ session('message') }}
-                    </div>
-                @endif
-            </div>
-            <div class="alert-wrapper" id="danger">
-                @if (session('deleted'))
-                    <div class="alert alert-danger alert-position" role="alert" id="danger-alert">
-                        {{ session('deleted') }}
-                    </div>
-                @endif
-            </div>
+            <!-- SweetAlert for Success -->
+            @if (session('message'))
+            <script>
+                Swal.fire({
+                    title: '{{ session('message') }}',
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Okay',
+                    timer: 5000,
+                    backdrop: `
+                        rgba(0, 0, 0, 0.5)  /* Semi-transparent dark background */
+                    `,
+                    customClass: {
+                        title: 'my-title', // Custom class for the title
+                        popup: 'my-popup', // Custom class for the popup
+                        confirmButton: 'my-confirm-button', // Custom class for the confirm button
+                    },
+                    position: 'top-end',  // Positioning at the top end
+                    width: '400px',        // Set the width of the alert
+                    padding: '10px',      // Padding inside the modal
+                });
+            </script>
+            @endif
+
+            <!-- SweetAlert for Danger (Deletion) -->
+            @if (session('deleted'))
+            <script>
+                Swal.fire({
+                    title: '{{ session('deleted') }}',
+                    icon: 'error',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Close',
+                    timer: 5000,
+                    backdrop: `rgba(0, 0, 0, 0.5)  /* Semi-transparent dark background for danger */`,
+                    customClass: {
+                        title: 'my-danger-title',
+                        popup: 'my-danger-popup',
+                        confirmButton: 'my-danger-confirm-button',
+                    },
+                    position: 'top-end',  // Positioning at the top end
+                    width: '400px',        // Set the width of the alert
+                    padding: '10px',      // Padding inside the modal
+                });
+            </script>
+            @endif
+
+
+
 
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <a href="{{ route('records.export') }}" id="export" class="btn41-43 btn-41" type="button">
@@ -256,10 +295,10 @@
                                         <a href="{{ url('admin/records/'. $record->id .'/edit') }}">
                                             <i class="fa-solid fa-pen-to-square action-icon edit-icon"></i>
                                         </a>
-                                        <form action="{{ url('admin/records/' . $record->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                        <form id="delete-form-{{ $record->id }}" action="{{ url('admin/records/' . $record->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" style="border: none; background: none; padding: 0;">
+                                            <button type="button" class="delete-button" data-id="{{ $record->id }}" style="border: none; background: none; padding: 0;">
                                                 <i class="fa-solid fa-trash action-icon delete-icon"></i>
                                             </button>
                                         </form>
@@ -271,6 +310,39 @@
                 </table>
             </div>
 
+            <script>
+                document.querySelectorAll('.delete-button').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const recordId = this.getAttribute('data-id');
+                        const form = document.getElementById(`delete-form-${recordId}`);
+
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit(); // Submit the form to delete the record
+
+                                // // Display success message
+                                // Swal.fire({
+                                //     title: 'Deleted!',
+                                //     text: 'Your file has been deleted.',
+                                //     icon: 'success',
+                                //     timer: 2000, // Message will last for 2 seconds
+                                //     showConfirmButton: false // Hide confirm button
+                                // });
+                            }
+                        });
+                    });
+                });
+            </script>
+
+
 
         </div>
     </div>
@@ -278,3 +350,6 @@
 <!-- end: Main -->
 
 @endsection
+
+<!-- SweetAlert Script -->
+

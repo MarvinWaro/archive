@@ -77,9 +77,11 @@ class AuthController extends Controller
     // Handle logout
     public function logout(Request $request)
     {
+        Log::info('User is logging out.');
         Auth::logout();
         return redirect('admin/login');
     }
+
 
     // Show forget password form
     public function showForgetPasswordForm()
