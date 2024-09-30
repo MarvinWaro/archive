@@ -21,10 +21,16 @@ Route::prefix('admin')->group(function () {
         Route::get('acic', 'acic_records')->name('acicLoad'); // ACIC records
         Route::get('mds', 'mds_records'); // MDS records
 
+
+        // Auth
         Route::get('login','login')->name('');
         Route::get('register','register')->name('');
         Route::get('forgot','forgot')->name('');
         Route::get('reset','reset')->name('');
+
+        // Profile
+
+        Route::get('profile','profile')->name('');
     });
 });
 

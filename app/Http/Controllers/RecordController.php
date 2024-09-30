@@ -220,4 +220,11 @@ class RecordController extends Controller
     }
 
 
+    // Profile
+
+    Public function profile(){
+        return view('users.index');
+    }
+
+
 }

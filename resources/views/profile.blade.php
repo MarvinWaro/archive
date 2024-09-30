@@ -84,7 +84,9 @@
         <!-- start: Content -->
         <div class="py-4 mt-5">
             <!-- start: Summary -->
-
+                <div class="container">
+                    <h3>Profile Information</h3>
+                </div>
 
 
             <!-- end: Content -->
