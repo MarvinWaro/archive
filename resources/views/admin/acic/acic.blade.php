@@ -182,10 +182,10 @@
                                         <a href="{{ url('admin/records/'. $record->id .'/edit') }}">
                                             <i class="fa-solid fa-pen-to-square action-icon edit-icon"></i>
                                         </a>
-                                        <form action="{{ url('admin/records/' . $record->id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                        <form id="delete-form-{{ $record->id }}" action="{{ url('admin/records/' . $record->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" style="border: none; background: none; padding: 0;">
+                                            <button type="button" class="delete-button" data-id="{{ $record->id }}" style="border: none; background: none; padding: 0;">
                                                 <i class="fa-solid fa-trash action-icon delete-icon"></i>
                                             </button>
                                         </form>
@@ -197,6 +197,38 @@
                 </table>
             </div>
 
+
+            <script>
+                document.querySelectorAll('.delete-button').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const recordId = this.getAttribute('data-id');
+                        const form = document.getElementById(`delete-form-${recordId}`);
+
+                        Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                form.submit(); // Submit the form to delete the record
+
+                                // // Display success message
+                                // Swal.fire({
+                                //     title: 'Deleted!',
+                                //     text: 'Your file has been deleted.',
+                                //     icon: 'success',
+                                //     timer: 2000, // Message will last for 2 seconds
+                                //     showConfirmButton: false // Hide confirm button
+                                // });
+                            }
+                        });
+                    });
+                });
+            </script>
 
             <!-- end: Content -->
         </div>

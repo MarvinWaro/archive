@@ -1444,6 +1444,45 @@ tbody tr td a{
     border: 1px solid #ddd; /* Optional: Add a subtle border */
 }
 
+/* Alerts css */
+
+/* Custom styles for the SweetAlert modal */
+.my-popup {
+    border-radius: 10px;  /* Rounded corners */
+    padding: 10px;        /* Padding inside the modal */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    max-width: 350px;     /* Maximum width for the popup */
+}
+
+/* Custom styles for the success title */
+.my-title {
+    color: #3c763d; /* Custom color for the success title */
+    font-size: 18px; /* Smaller font size */
+}
+
+/* Custom styles for the error title */
+.my-danger-title {
+    color: #a94442; /* Custom color for the danger title */
+    font-size: 18px; /* Smaller font size */
+}
+
+/* Custom styles for the confirm button */
+.my-confirm-button {
+    background-color: #5cb85c; /* Green background for confirm button */
+    color: white; /* White text color */
+}
+
+/* Custom styles for the danger confirm button */
+.my-danger-confirm-button {
+    background-color: #d9534f; /* Red background for danger confirm button */
+    color: white; /* White text color */
+}
+
+
+
+
+
+
 
 
 
