@@ -32,6 +32,21 @@
 
     </style>
 
+    @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+    @endif
+
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        @foreach ($errors->all() as $error)
+            <p>{{ $error }}</p>
+        @endforeach
+    </div>
+    @endif
+
+
     <div class="d-flex justify-content-center align-items-center vh-100 ched-img-bg">
         <div class="card p-4 shadow-lg px-4 custom-card" style="width: 100%; max-width: 470px; border-radius: 30px; padding: 25px 40px !important">
             <!-- Logo Section -->
@@ -43,10 +58,11 @@
             <h4 class="text-center text-heading mb-4 mt-2">Forgot Password</h4>
 
             <!-- Login Form -->
-            <form action="#">
+            <form action="{{ route('password.email') }}" method="POST">
+                @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label text-black label-custom">Email</label>
-                    <input type="email" class="form-control input-custom" id="email" placeholder="testuser@ched.gov.ph" required>
+                    <input type="email" class="form-control input-custom" id="email" name="email" placeholder="testuser@ched.gov.ph" required>
                 </div>
                 <div class="d-grid">
                     <button type="submit" class="btn btn-primary button-custom">Submit</button>
@@ -55,6 +71,7 @@
                     <p class="text-center mt-3"><a href="{{ url('admin/login') }}" class="login-link">Login Here</a></p>
                 </div>
             </form>
+
         </div>
     </div>
 
