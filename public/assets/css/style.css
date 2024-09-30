@@ -1131,32 +1131,185 @@ tbody tr td a{
     background-color: darken(var(--main-color), 10%);
 } */
 
+/* SUBMISSION BUTTON */
 
-.add_record_button {
+.submitting.btn41-43{
+    padding: 10px 35px;
+    font-weight: 500;
+    background: transparent;
+    outline: none !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    background: #198754;
+    text-decoration: none;
+}
+
+
+.submitting.btn-41 {
+    border: 1px solid #198754;
+    z-index: 1;
+    color: white;
+    border-radius: 10px;
+}
+
+
+.submitting.btn-41:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    direction: rtl;
+    z-index: -1;
+    background: rgb(255, 255, 255);
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.submitting.btn-41:hover {
+    color: #198754;
+}
+
+.submitting.btn-41:hover:after {
+    left: auto;
+    right: 0;
+    width: 100%;
+}
+
+.submitting.btn-41:active {
+    top: 2px;
+}
+
+/* BACK BUTTON */
+
+.back.btn41-43{
+    padding: 10px 35px;
+    font-weight: 500;
+    background: transparent;
+    outline: none !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    background: #757575;
+    text-decoration: none;
+}
+
+
+.back.btn-41 {
+    border: 1px solid #757575;
+    z-index: 1;
+    color: white;
+    border-radius: 10px;
+}
+
+
+.back.btn-41:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    direction: rtl;
+    z-index: -1;
+    background: rgb(255, 255, 255);
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.back.btn-41:hover {
+    color: #757575;
+}
+
+.back.btn-41:hover:after {
+    left: auto;
+    right: 0;
+    width: 100%;
+}
+
+.back.btn-41:active {
+    top: 2px;
+}
+
+
+.btn41-43 {
+    padding: 10px 35px;
+    font-weight: 500;
+    background: transparent;
+    outline: none !important;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    background: var(--maincolor);
+    text-decoration: none;
+}
+
+.btn-41 {
+    border: 1px solid var(--maincolor);
+    z-index: 1;
+    color: white;
+    border-radius: 10px;
+}
+
+.btn-41:after {
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 100%;
+    top: 0;
+    left: 0;
+    direction: rtl;
+    z-index: -1;
+    background: rgb(255, 255, 255);
+    transition: all 0.3s ease;
+    border-radius: 10px;
+}
+
+.btn-41:hover {
+    color: var(--maincolor);
+}
+
+.btn-41:hover:after {
+    left: auto;
+    right: 0;
+    width: 100%;
+}
+
+.btn-41:active {
+    top: 2px;
+}
+
+
+/* .add_record_button {
     color: var(--bs-light) !important;
     background-color: var(--maincolor) !important;
     transition: background-color 0.3s ease, opacity 0.3s ease !important;
     padding-right: 32px !important;
     padding-left: 32px !important;
-}
+} */
 
-.icon-button{
+/* .icon-button{
     color: var(--bs-light) !important;
     background-color: var(--maincolor) !important;
     transition: background-color 0.3s ease, opacity 0.3s ease !important;
     padding-right: 32px !important;
     padding-left: 32px !important;
-}
+} */
 
-.add_record_button:hover {
-    background-color: #004080 !important; /* Adjust to a darker shade of --maincolor */
+/* .add_record_button:hover {
+    background-color: #004080 !important;
     opacity: 0.9 !important;
-}
+} */
 
-.icon-button:hover {
-    background-color: #004080 !important; /* Adjust to a darker shade of --maincolor */
+/* .icon-button:hover {
+    background-color: #004080 !important;
     opacity: 0.9 !important;
-}
+} */
 
 .text-heading{
     color: var(--maincolor);
