@@ -32,22 +32,71 @@
 
     </style>
 
-    @if (session('status'))
-    <div class="alert alert-success">
-        {{ session('status') }}
-    </div>
-    @endif
 
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        @foreach ($errors->all() as $error)
-            <p>{{ $error }}</p>
-        @endforeach
-    </div>
-    @endif
 
 
     <div class="d-flex justify-content-center align-items-center vh-100 ched-img-bg">
+
+
+
+        {{-- @if ($errors->any())
+        <div class="alert alert-danger">
+            @foreach ($errors->all() as $error)
+                <p></p>
+            @endforeach
+        </div>
+        @endif --}}
+
+
+        @if (session('status'))
+            <script>
+                Swal.fire({
+                    title: '{{ session('status') }}',
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Okay',
+                    timer: 5000,
+                    backdrop: `
+                        rgba(0, 0, 0, 0.5)  /* Semi-transparent dark background */
+                    `,
+                    customClass: {
+                        title: 'my-title', // Custom class for the title
+                        popup: 'my-popup', // Custom class for the popup
+                        confirmButton: 'my-confirm-button', // Custom class for the confirm button
+                    },
+                    position: 'top-end', // Positioning at the center
+                    width: '400px',     // Set the width of the alert
+                    padding: '10px',    // Padding inside the modal
+                });
+            </script>
+        @endif
+
+
+        @if ($errors->any())
+            <script>
+                Swal.fire({
+                    title: 'Error(s) Occurred:',
+                    icon: 'error',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Close',
+                    timer: 5000,
+                    backdrop: `rgba(0, 0, 0, 0.5)  /* Semi-transparent dark background for danger */`,
+                    customClass: {
+                        title: 'my-danger-title',
+                        popup: 'my-danger-popup',
+                        confirmButton: 'my-danger-confirm-button',
+                    },
+                    position: 'top-end',  // Positioning at the top end
+                    width: '400px',        // Set the width of the alert
+                    padding: '10px',      // Padding inside the modal
+                    html: `@foreach ($errors->all() as $error) <p>{{ $error }}</p> @endforeach` // Display all errors in a paragraph format
+                });
+            </script>
+        @endif
+
+
+
+
         <div class="card p-4 shadow-lg px-4 custom-card" style="width: 100%; max-width: 470px; border-radius: 30px; padding: 25px 40px !important">
             <!-- Logo Section -->
             <div class="logo-wrapper d-flex justify-content-center mb-4 mt-4">
@@ -74,7 +123,6 @@
 
         </div>
     </div>
-
 
 @endsection
 

@@ -97,7 +97,7 @@ class AuthController extends Controller
         $response = Password::sendResetLink($request->only('email'));
 
         return $response == Password::RESET_LINK_SENT
-            ? back()->with('status', 'Reset link sent to your email!')
+            ? back()->with('status', 'Reset password link was sent to your email!')
             : back()->withErrors(['email' => trans($response)]);
     }
 
@@ -123,8 +123,13 @@ class AuthController extends Controller
             }
         );
 
-        return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
+        if ($status === Password::PASSWORD_RESET) {
+            // Set a success message in the session
+            return redirect()->route('login')->with('status', 'Your password has been reset successfully!');
+        }
+
+        return back()->withErrors(['email' => [__($status)]]);
     }
+
+
 }
