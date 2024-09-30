@@ -43,7 +43,7 @@
             <h4 class="text-center text-heading mb-4 mt-2">Admin Login</h4>
 
             <!-- Login Form -->
-            <form action="/login" method="POST">
+            <form action="{{ route('login') }}" method="POST">
                 @csrf
                 <div class="mb-3">
                     <label for="email" class="form-label text-black label-custom">Email</label>
@@ -57,8 +57,8 @@
                     <button type="submit" class="btn btn-primary button-custom">Login</button>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <p class="text-center mt-3"><a href="{{ url('forgot-password') }}" class="login-link">Forgot Password</a></p>
-                    <p class="text-center mt-3"><a href="{{ url('register') }}" class="login-link">Register here</a></p>
+                    <p class="text-center mt-3"><a href="{{ url('admin/forgot-password') }}" class="login-link">Forgot Password</a></p>
+                    <p class="text-center mt-3"><a href="{{ url('admin/register') }}" class="login-link">Register here</a></p>
                 </div>
             </form>
         </div>
