@@ -985,6 +985,10 @@ form .error {
 
 /* CHED */
 
+.maincolor{
+    color: var(--maincolor);
+}
+
 .fade-out {
     opacity: 0;
     transition: opacity 0.5s ease; /* Adjust the duration to match your needs */
@@ -1408,6 +1412,39 @@ tbody tr td a{
     margin-top: 8px;
     font-size: 20px;
 }
+
+.delete-account-custom {
+    border-color: red; /* Border color */
+    outline-color: red; /* Outline color */
+    outline-style: solid; /* Outline style */
+    outline-width: 1px; /* Outline width */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds a shadow */
+}
+
+
+.delete-account-heading{
+    color: red;
+    padding-top: 20px;
+}
+
+
+.delete-account-subheading{
+    color: red;
+}
+
+.delete-button-profile{
+    padding-bottom: 20px;
+}
+
+.profile-wrapper {
+    border-radius: 10px; /* Rounds the corners with 10px radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow to all sides */
+    padding: 20px; /* Optional: Add padding inside the wrapper */
+    background-color: white; /* Optional: Set a background color */
+    border: 1px solid #ddd; /* Optional: Add a subtle border */
+}
+
+
 
 
 
