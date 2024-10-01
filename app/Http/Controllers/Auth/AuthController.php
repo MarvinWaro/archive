@@ -132,4 +132,52 @@ class AuthController extends Controller
     }
 
 
+    // update internal admin
+
+    public function updateProfile(Request $request)
+    {
+        // Validate the incoming data
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . Auth::id(),
+        ]);
+
+        // Update the authenticated user's profile
+        $user = Auth::user();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+
+        // Redirect back with success message
+        return back()->with('success', 'Profile updated successfully!');
+    }
+
+
+    // In AuthController.php
+
+    public function updatePassword(Request $request)
+    {
+        // Validate the input
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:8|confirmed', // Ensures password confirmation
+        ]);
+
+        $user = auth()->user();
+
+        // Check if current password matches
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->with('error', 'Current password does not match.');
+        }
+
+        // Update with the new password
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return back()->with('success', 'Password updated successfully.');
+    }
+
+
+
+
 }
