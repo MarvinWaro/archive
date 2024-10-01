@@ -33,6 +33,29 @@
     </style>
 
     <div class="d-flex justify-content-center align-items-center vh-100 ched-img-bg">
+
+        @if (session('status'))
+            <script>
+                Swal.fire({
+                    title: '{{ session('status') }}',
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Okay',
+                    timer: 5000,
+                    backdrop: `rgba(0, 0, 0, 0.5)`,
+                    customClass: {
+                        title: 'my-title',
+                        popup: 'my-popup',
+                        confirmButton: 'my-confirm-button',
+                    },
+                    position: 'top-end',
+                    width: '400px',
+                    padding: '10px',
+                });
+            </script>
+        @endif
+
+
         <div class="card p-4 shadow-lg px-4 custom-card" style="width: 100%; max-width: 470px; border-radius: 30px; padding: 25px 40px !important">
             <!-- Logo Section -->
             <div class="logo-wrapper d-flex justify-content-center mb-4 mt-4">
