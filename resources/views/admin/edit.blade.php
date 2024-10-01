@@ -73,10 +73,14 @@
                     <img class="navbar-profile-image" src="{{ asset('assets/img/ched_logo.png') }}" alt="Image" />
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="profile.php"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
-                    <li><a class="dropdown-item" href="settings.php"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
+                    <li><a class="dropdown-item" href="{{ url('admin/profile') }}"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
+                    <li><a class="dropdown-item" href="#!"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
                     <hr class="w-100">
-                    <li><a class="dropdown-item" href="../login/logout.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}">
+                            <i class="fa-solid fa-right-from-bracket me-2"></i>Logout
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -124,7 +128,7 @@
                             </div>
 
                             <!-- Folder Name -->
-                            <div class="mb-3">
+                            <div class="mb-3 col-lg-6">
                                 <label for="folder_name_select" class="form-label required">Folder Name</label>
                                 <select id="folder_name_select" name="folder_name" class="form-select">
                                     <option value="">Select Folder Name</option>
@@ -140,7 +144,7 @@
                             </div>
 
                             <!-- Folder Type -->
-                            <div class="col-lg-4 mb-3">
+                            <div class="col-lg-6 mb-3">
                                 <label for="folder_number_select" class="form-label required">Folder Type</label>
                                 <select id="folder_number_select" name="folder_type" class="form-select">
                                     <option value="">Select Folder Type</option>
@@ -153,7 +157,7 @@
                             </div>
 
                             <!-- Number -->
-                            <div class="col-lg-8 mb-3">
+                            <div class="col-lg-12 mb-3">
                                 <label for="text_num" class="form-label required">Number</label>
                                 <textarea id="text_num" name="number" cols="30" rows="4" class="form-control" placeholder="Please Enter Acic / Check Number Here">{{ $record->number }}</textarea>
                                 @error('number')

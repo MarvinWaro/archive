@@ -73,10 +73,14 @@
                     <img class="navbar-profile-image" src="{{ asset('assets/img/ched_logo.png') }}" alt="Image" />
                 </div>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="profile.php"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
-                    <li><a class="dropdown-item" href="settings.php"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
+                    <li><a class="dropdown-item" href="{{ url('admin/profile') }}"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
+                    <li><a class="dropdown-item" href="#!"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
                     <hr class="w-100">
-                    <li><a class="dropdown-item" href="../login/logout.php"><i class="fa-solid fa-right-from-bracket me-2"></i>Logout</a></li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}">
+                            <i class="fa-solid fa-right-from-bracket me-2"></i>Logout
+                        </a>
+                    </li>
                 </ul>
             </div>
         </nav>
