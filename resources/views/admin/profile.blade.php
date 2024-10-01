@@ -85,70 +85,154 @@
             </div>
         </nav>
 
+
+        <!-- Success Message -->
+        @if(session('success'))
+            <script>
+                Swal.fire({
+                    title: '{{ session('success') }}',
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Okay',
+                    timer: 5000,
+                    backdrop: `rgba(0, 0, 0, 0.5)`,
+                    customClass: {
+                        title: 'my-title',
+                        popup: 'my-popup',
+                        confirmButton: 'my-confirm-button',
+                    },
+                    position: 'top-end',
+                    width: '400px',
+                    padding: '10px',
+                });
+            </script>
+        @endif
+
+        <!-- Error Message -->
+        @if(session('error'))
+            <script>
+                Swal.fire({
+                    title: '{{ session('error') }}',
+                    icon: 'error',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Close',
+                    timer: 5000,
+                    backdrop: `rgba(0, 0, 0, 0.5)`,
+                    customClass: {
+                        title: 'my-danger-title',
+                        popup: 'my-danger-popup',
+                        confirmButton: 'my-danger-confirm-button',
+                    },
+                    position: 'top-end',
+                    width: '400px',
+                    padding: '10px',
+                });
+            </script>
+        @endif
+
+        <!-- Validation Error Handling -->
+        @if($errors->any())
+            <script>
+                Swal.fire({
+                    title: 'Error',
+                    icon: 'error',
+                    html: `<ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>`,
+                    showConfirmButton: true,
+                    confirmButtonText: 'Close',
+                    timer: 5000,
+                    backdrop: `rgba(0, 0, 0, 0.5)`,
+                    customClass: {
+                        title: 'my-danger-title',
+                        popup: 'my-danger-popup',
+                        confirmButton: 'my-danger-confirm-button',
+                    },
+                    position: 'top-end',
+                    width: '400px',
+                    padding: '10px',
+                });
+            </script>
+        @endif
+
+
+
         <!-- start: Content -->
         <div class="py-4 mt-5">
             <!-- start: Summary -->
                 <div class="container ">
 
                     <div class="profile-wrapper mb-5">
-
                         <h3 class="maincolor fw-bold mt-3 mb-5"><i class="fa-solid fa-user me-3"></i>Profile Information</h3>
                         <div class="mt-4">
-                            <form  action="">
+                            <form action="{{ route('admin.profile.update') }}" method="POST">
+                                @csrf <!-- Add this for form security -->
+                                @method('PUT') <!-- Use PUT for updating data -->
+
                                 <div class="mb-3">
                                     <label for="name" class="form-label label-custom">Name</label>
-                                    <input type="name" class="form-control" id="name">
+                                    <input type="text" name="name" class="form-control" id="name" value="{{ Auth::user()->name }}">
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="exampleFormControlInput1" class="form-label label-custom">Email address</label>
-                                    <input type="email" class="form-control" id="email">
+                                    <label for="email" class="form-label label-custom">Email address</label>
+                                    <input type="email" name="email" class="form-control" id="email" value="{{ Auth::user()->email }}">
                                 </div>
+
                                 <div class="col-auto">
                                     <button type="submit" class="btn btn-primary mb-3">Save Changes</button>
                                 </div>
                             </form>
                         </div>
-
                     </div>
+
 
                     <div class="profile-wrapper mb-5">
 
                         <h3 class="maincolor fw-bold mt-3 mb-5"><i class="fa-solid fa-shield-halved me-3"></i>Account and Security</h3>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="">
-                                    <h5 class="mb-3 text-center">Account Password</h5>
-                                    <form  action="">
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label label-custom">Current Password</label>
-                                            <input type="password" class="form-control" id="password">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label label-custom">New Password</label>
-                                            <input type="password" class="form-control" id="password">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="name" class="form-label label-custom">Confirm New Password</label>
-                                            <input type="password" class="form-control" id="password">
-                                        </div>
-                                    </form>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="">
+                                        <h5 class="mb-3 text-center">Account Password</h5>
+                                        <form action="{{ route('admin.updatePassword') }}" method="POST">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="current_password" class="form-label label-custom">Current Password</label>
+                                                <input type="password" class="form-control" id="current_password" name="current_password" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="new_password" class="form-label label-custom">New Password</label>
+                                                <input type="password" class="form-control" id="new_password" name="new_password" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="new_password_confirmation" class="form-label label-custom">Confirm New Password</label>
+                                                <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation" required>
+                                            </div>
+                                            <div class="col-auto">
+                                                <button type="submit" class="btn btn-primary mb-3">Change Password</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="li-wrapper">
-                                    <h5 class="mb-5 text-center">Login History</h5>
 
-                                    <ul class="list-group">
-                                        <li class="list-group-item">Updated 2 mins ago</li>
-                                        <li class="list-group-item">Updated 2 mins ago</li>
-                                        <li class="list-group-item">Updated 2 mins ago</li>
-                                        <li class="list-group-item">Updated 2 mins ago</li>
-                                        <li class="list-group-item">Updated 2 mins ago</li>
-                                    </ul>
+                                <div class="col-lg-6">
+                                    <div class="li-wrapper">
+                                        <h5 class="mb-5 text-center">Login History</h5>
 
+                                        <ul class="list-group">
+                                            <li class="list-group-item">Updated 2 mins ago</li>
+                                            <li class="list-group-item">Updated 2 mins ago</li>
+                                            <li class="list-group-item">Updated 2 mins ago</li>
+                                            <li class="list-group-item">Updated 2 mins ago</li>
+                                            <li class="list-group-item">Updated 2 mins ago</li>
+                                        </ul>
+
+                                    </div>
                                 </div>
+
                             </div>
-                        </div>
 
                     </div>
 
