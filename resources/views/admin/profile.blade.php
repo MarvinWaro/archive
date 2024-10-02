@@ -67,22 +67,24 @@
             <h5 class="fw-bold mb-0 me-auto" id="head">Profile</h5>
 
 
-            <div class="dropdown">
-                <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="me-2 d-none d-sm-block pe-2">Marvin Waro</span>
-                    <img class="navbar-profile-image" src="{{ asset('assets/img/ched_logo.png') }}" alt="Image" />
+            @if(Auth::check())
+                <div class="dropdown me-3">
+                    <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="me-2 d-none d-sm-block pe-2">{{ Auth::user()->name }}</span>
+                        <img class="navbar-profile-image" src="{{ asset('assets/img/ched_logo.png') }}" alt="Image" />
+                    </div>
+                    <ul class="dropdown-menu me-3" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{ url('admin/profile') }}"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#!"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
+                        <hr class="w-100">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}">
+                                <i class="fa-solid fa-right-from-bracket me-2"></i>Logout
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="{{ url('admin/profile') }}"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
-                    <li><a class="dropdown-item" href="#!"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
-                    <hr class="w-100">
-                    <li>
-                        <a class="dropdown-item" href="{{ route('logout') }}">
-                            <i class="fa-solid fa-right-from-bracket me-2"></i>Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            @endif
         </nav>
 
 
@@ -237,23 +239,44 @@
                     </div>
 
                     <div class="profile-wrapper mb-5">
-
-                        <h3 class="maincolor fw-bold mt-3 mb-5"><i class="fa-solid fa-triangle-exclamation me-3"></i>Danger Zone</h3>
+                        <h3 class="maincolor fw-bold mt-3 mb-5">
+                            <i class="fa-solid fa-triangle-exclamation me-3"></i>Danger Zone
+                        </h3>
                         <div class="row mb-4">
                             <div class="col-lg-12 text-center">
-
                                 <div class="container delete-account-custom">
                                     <h6 class="mt-3 delete-account-heading">Delete Account</h6>
                                     <p class="delete-account-subheading">Warning. Once you delete your account, there's no going back</p>
-                                    <form class="delete-button-profile" action="">
-                                        <button class="btn btn-danger">Delete This Account</button>
+                                    <form class="delete-button-profile" id="delete-account-form" action="{{ route('deleteAccount') }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-danger" id="delete-account-btn">Delete This Account</button>
                                     </form>
                                 </div>
-
                             </div>
                         </div>
-
                     </div>
+
+                    <script>
+                        document.getElementById('delete-account-btn').addEventListener('click', function (e) {
+                            e.preventDefault(); // Prevent the form from submitting immediately
+                            Swal.fire({
+                                title: 'Are you sure?',
+                                text: "This action is irreversible. Do you really want to delete your account?",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#d33',
+                                cancelButtonColor: '#3085d6',
+                                confirmButtonText: 'Yes, delete it!',
+                                cancelButtonText: 'Cancel'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    // If the user confirmed, submit the form
+                                    document.getElementById('delete-account-form').submit();
+                                }
+                            });
+                        });
+                    </script>
 
                 </div>
 

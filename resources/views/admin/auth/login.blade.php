@@ -34,6 +34,29 @@
 
     <div class="d-flex justify-content-center align-items-center vh-100 ched-img-bg">
 
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    title: 'Success!',
+                    text: '{{ session('success') }}',
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Okay',
+                    timer: 5000,
+                    backdrop: `rgba(0, 0, 0, 0.5)`,
+                    customClass: {
+                        title: 'my-success-title',
+                        popup: 'my-success-popup',
+                        confirmButton: 'my-success-confirm-button',
+                    },
+                    position: 'top-end',
+                    width: '400px',
+                    padding: '10px',
+                });
+            </script>
+        @endif
+
+
         @if (session('status'))
             <script>
                 Swal.fire({
@@ -54,6 +77,53 @@
                 });
             </script>
         @endif
+
+        @if ($errors->any())
+            <script>
+                Swal.fire({
+                    title: 'Error(s) Occurred:',
+                    icon: 'error',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Close',
+                    timer: 5000,
+                    backdrop: `rgba(0, 0, 0, 0.5)`,
+                    customClass: {
+                        title: 'my-danger-title',
+                        popup: 'my-danger-popup',
+                        confirmButton: 'my-danger-confirm-button',
+                    },
+                    position: 'top-end',
+                    width: '400px',
+                    padding: '10px',
+                    html: `@foreach ($errors->all() as $error) <p>{{ $error }}</p> @endforeach`
+                });
+            </script>
+        @endif
+
+
+        @if (session('account_deleted'))
+            <script>
+                Swal.fire({
+                    title: 'Account Deleted',
+                    text: "{{ session('account_deleted') }}",
+                    icon: 'success',
+                    showConfirmButton: true,
+                    confirmButtonText: 'Close',
+                    timer: 3000,
+                    backdrop: `rgba(0, 0, 0, 0.5)`,
+                    customClass: {
+                        title: 'my-success-title',
+                        popup: 'my-success-popup',
+                        confirmButton: 'my-success-confirm-button',
+                    },
+                    position: 'top-end',
+                    width: '400px',
+                    padding: '10px',
+                });
+            </script>
+        @endif
+
+
 
 
         <div class="card p-4 shadow-lg px-4 custom-card" style="width: 100%; max-width: 470px; border-radius: 30px; padding: 25px 40px !important">

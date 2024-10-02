@@ -22,11 +22,13 @@ class AuthController extends Controller
     // Handle registration
     public function register(Request $request)
     {
-        // Validate the request
+        // Validate the request with custom error messages
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:8|confirmed', // Min length 8 characters
+        ], [
+            'password.min' => 'The password must be at least 8 characters long.', // Custom message for password length
         ]);
 
         if ($validator->fails()) {
@@ -44,6 +46,7 @@ class AuthController extends Controller
         return redirect('admin/login')->with('success', 'Registration successful! Please log in.');
     }
 
+
     // Show login form
     public function showLoginForm()
     {
@@ -59,20 +62,33 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        // Attempt to authenticate the user
+        // Check if the email exists in the database
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            // Email does not exist, return a specific error message
+            Log::warning('Login attempt with non-existent email: ' . $request->email);
+            return back()->withErrors(['message' => 'Account does not exist in the database']);
+        }
+
+        // Attempt to authenticate the user with email and password
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             // Authentication passed
-            // Log the successful attempt
             Log::info('User logged in: ' . Auth::user()->email);
 
-            // Redirect to the intended route or dashboard
+            // Flash a welcome message to the session
+            session()->flash('welcome_message', 'Welcome ' . Auth::user()->name . '!');
+
+            // Redirect to the dashboard
             return redirect()->route('dashboard');
         } else {
-            // Log failed attempt for debugging
+            // Authentication failed, wrong password
             Log::warning('Login failed for: ' . $request->email);
             return back()->withErrors(['message' => 'Invalid credentials']);
         }
     }
+
+
 
     // Handle logout
     public function logout(Request $request)
@@ -175,6 +191,24 @@ class AuthController extends Controller
         $user->save();
 
         return back()->with('success', 'Password updated successfully.');
+    }
+
+
+    public function deleteAccount(Request $request)
+    {
+        $user = Auth::user();
+
+        // Log the user out first
+        Auth::logout();
+
+        // Delete the user's account
+        $user->delete();
+
+        // Flash a session message for feedback
+        session()->flash('account_deleted', 'Your account has been successfully deleted.');
+
+        // Redirect to the login page
+        return redirect()->route('login');
     }
 
 
