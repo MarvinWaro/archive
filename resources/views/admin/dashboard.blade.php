@@ -65,12 +65,12 @@
 
 
             @if(Auth::check())
-                <div class="dropdown">
+                <div class="dropdown me-3">
                     <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="me-2 d-none d-sm-block pe-2">{{ Auth::user()->name }}</span>
                         <img class="navbar-profile-image" src="{{ asset('assets/img/ched_logo.png') }}" alt="Image" />
                     </div>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <ul class="dropdown-menu me-3" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="{{ url('admin/profile') }}"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
                         <li><a class="dropdown-item" href="#!"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
                         <hr class="w-100">
@@ -141,6 +141,30 @@
             </div>
 
             {{-- Alerts --}}
+
+            
+            @if (session('welcome_message'))
+                <script>
+                    Swal.fire({
+                        title: 'Welcome!',
+                        text: "{{ session('welcome_message') }}",
+                        icon: 'success',
+                        showConfirmButton: true,
+                        confirmButtonText: 'Close',
+                        timer: 3000,
+                        backdrop: `rgba(0, 0, 0, 0.5)`,
+                        customClass: {
+                            title: 'my-success-title',
+                            popup: 'my-success-popup',
+                            confirmButton: 'my-success-confirm-button',
+                        },
+                        position: 'top-end',
+                        width: '400px',
+                        padding: '10px',
+                    });
+                </script>
+            @endif
+
 
             <!-- SweetAlert for Success -->
             @if (session('message'))

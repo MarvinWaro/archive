@@ -67,22 +67,24 @@
             <h5 class="fw-bold mb-0 me-auto" id="head">ACIC</h5>
 
 
-            <div class="dropdown">
-                <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="me-2 d-none d-sm-block pe-2">Marvin Waro</span>
-                    <img class="navbar-profile-image" src="{{ asset('assets/img/ched_logo.png') }}" alt="Image" />
+            @if(Auth::check())
+                <div class="dropdown me-3">
+                    <div class="d-flex align-items-center cursor-pointer dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="me-2 d-none d-sm-block pe-2">{{ Auth::user()->name }}</span>
+                        <img class="navbar-profile-image" src="{{ asset('assets/img/ched_logo.png') }}" alt="Image" />
+                    </div>
+                    <ul class="dropdown-menu me-3" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{ url('admin/profile') }}"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
+                        <li><a class="dropdown-item" href="#!"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
+                        <hr class="w-100">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}">
+                                <i class="fa-solid fa-right-from-bracket me-2"></i>Logout
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" href="{{ url('admin/profile') }}"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
-                    <li><a class="dropdown-item" href="#!"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
-                    <hr class="w-100">
-                    <li>
-                        <a class="dropdown-item" href="{{ route('logout') }}">
-                            <i class="fa-solid fa-right-from-bracket me-2"></i>Logout
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            @endif
         </nav>
 
         <!-- start: Content -->

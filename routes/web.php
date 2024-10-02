@@ -50,7 +50,7 @@ Route::prefix('admin')->group(function () {
 
         // In web.php (routes file)
         Route::post('admin/password/update', [AuthController::class, 'updatePassword'])->name('admin.updatePassword');
-
+        Route::delete('admin/profile/delete', [AuthController::class, 'deleteAccount'])->name('deleteAccount');
 
 
     });
