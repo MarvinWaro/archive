@@ -75,7 +75,6 @@
                     </div>
                     <ul class="dropdown-menu me-3" aria-labelledby="dropdownMenuButton1">
                         <li><a class="dropdown-item" href="{{ url('admin/profile') }}"><i class="fa-solid fa-user me-2"></i>Profile</a></li>
-                        <li><a class="dropdown-item" href="#!"><i class="fa-solid fa-gear me-2"></i>Settings</a></li>
                         <hr class="w-100">
                         <li>
                             <a class="dropdown-item" href="{{ route('logout') }}">
