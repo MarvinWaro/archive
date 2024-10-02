@@ -11,6 +11,9 @@ use Illuminate\Http\Request;
 use App\Models\User; // Import User Model
 use Illuminate\Support\Facades\Log; // Import logging if not already imported
 use App\Models\LoginHistory; // Add this line
+use Jenssegers\Agent\Agent;
+
+
 
 class AuthController extends Controller
 {
@@ -77,10 +80,23 @@ class AuthController extends Controller
             // Authentication passed
             Log::info('User logged in: ' . Auth::user()->email);
 
+            // Get the IP address
+            $ipAddress = $request->ip();
+
+            // Get browser and OS information using Jenssegers Agent
+            $agent = new Agent();
+            $browser = $agent->browser();
+            $browserVersion = $agent->version($browser);
+            $os = $agent->platform();
+            $osVersion = $agent->version($os);
+
             // Record login history
             LoginHistory::create([
                 'user_id' => Auth::id(), // Save the currently authenticated user's ID
                 'logged_in_at' => now(), // Store the current timestamp
+                'ip_address' => $ipAddress, // Store the user's IP address
+                'browser' => $browser . ' (v' . $browserVersion . ')', // Store browser info
+                'os' => $os . ' ' . $osVersion, // Store OS info
             ]);
 
             // Flash a welcome message to the session

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RecordController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\ProfileController;
 
 
 
@@ -51,6 +52,9 @@ Route::prefix('admin')->group(function () {
         // In web.php (routes file)
         Route::post('admin/password/update', [AuthController::class, 'updatePassword'])->name('admin.updatePassword');
         Route::delete('admin/profile/delete', [AuthController::class, 'deleteAccount'])->name('deleteAccount');
+
+        Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+
 
 
     });
