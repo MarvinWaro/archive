@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User; // Import User Model
 use Illuminate\Support\Facades\Log; // Import logging if not already imported
+use App\Models\LoginHistory; // Add this line
 
 class AuthController extends Controller
 {
@@ -76,6 +77,12 @@ class AuthController extends Controller
             // Authentication passed
             Log::info('User logged in: ' . Auth::user()->email);
 
+            // Record login history
+            LoginHistory::create([
+                'user_id' => Auth::id(), // Save the currently authenticated user's ID
+                'logged_in_at' => now(), // Store the current timestamp
+            ]);
+
             // Flash a welcome message to the session
             session()->flash('welcome_message', 'Welcome ' . Auth::user()->name . '!');
 
@@ -87,7 +94,6 @@ class AuthController extends Controller
             return back()->withErrors(['message' => 'Invalid credentials']);
         }
     }
-
 
 
     // Handle logout
