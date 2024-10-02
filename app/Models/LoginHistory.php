@@ -11,5 +11,10 @@ class LoginHistory extends Model
 
     protected $fillable = [
         'user_id',
-    ] ;
+    ];
+
+    protected $casts = [
+        'logged_in_at' => 'datetime', // Add this line
+    ];
 }
+
