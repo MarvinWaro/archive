@@ -191,77 +191,100 @@
 
 
                     <div class="profile-wrapper mb-5">
+
+                        <h3 class="maincolor fw-bold mt-3 mb-5"><i class="fa-solid fa-shield-halved me-3"></i>Account and Security</h3>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="">
+                                        <h5 class="mb-3 text-center">Account Password</h5>
+                                        <form action="{{ route('admin.updatePassword') }}" method="POST">
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="current_password" class="form-label label-custom">Current Password</label>
+                                                <input type="password" class="form-control" id="current_password" name="current_password" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="new_password" class="form-label label-custom">New Password</label>
+                                                <input type="password" class="form-control" id="new_password" name="new_password" required>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="new_password_confirmation" class="form-label label-custom">Confirm New Password</label>
+                                                <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation" required>
+                                            </div>
+                                            <div class="col-auto">
+                                                <button type="submit" class="btn btn-primary mb-3">Change Password</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="li-wrapper">
+                                        <h5 class="mb-5 text-center">Login History</h5>
+
+                                        <ul class="list-group">
+                                            @foreach ($user->loginHistories->sortByDesc('logged_in_at')->take(5) as $login)
+                                                <li class="list-group-item">
+                                                    Logged in on <strong>{{ $login->logged_in_at->format('Y-m-d H:i:s') }}</strong> from IP address <strong>{{ $login->ip_address }}</strong> using <strong>{{ $login->browser }} (v{{ $login->browser_version }})</strong> on <strong>{{ $login->os }} {{ $login->os_version }}</strong>.
+                                                </li>
+                                            @endforeach
+                                        </ul>
+
+                                        @if ($user->loginHistories->count() > 5)
+                                            <!-- View More Button -->
+                                            <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#loginHistoryModal">
+                                                View More
+                                            </button>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <!-- View All Modal -->
+                                <div class="modal fade" id="loginHistoryModal" tabindex="-1" aria-labelledby="loginHistoryModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg modal-dialog-centered"> <!-- Added modal-dialog-centered here -->
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="loginHistoryModalLabel">Full Login History</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body" style="max-height: 400px; overflow-y: auto;">
+                                                <ul class="list-group">
+                                                    @foreach ($user->loginHistories->sortByDesc('logged_in_at') as $login)
+                                                        <li class="list-group-item">
+                                                            Logged in on <strong>{{ $login->logged_in_at->format('Y-m-d H:i:s') }}</strong> from IP address <strong>{{ $login->ip_address }}</strong> using <strong>{{ $login->browser }} (v{{ $login->browser_version }})</strong> on <strong>{{ $login->os }} {{ $login->os_version }}</strong>.
+                                                        </li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                    </div>
+
+                    <div class="profile-wrapper mb-5">
                         <h3 class="maincolor fw-bold mt-3 mb-5">
-                            <i class="fa-solid fa-shield-halved me-3"></i>Account and Security
+                            <i class="fa-solid fa-triangle-exclamation me-3"></i>Danger Zone
                         </h3>
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="">
-                                    <h5 class="mb-3 text-center">Account Password</h5>
-                                    <form action="{{ route('admin.updatePassword') }}" method="POST">
+                        <div class="row mb-4">
+                            <div class="col-lg-12 text-center">
+                                <div class="container delete-account-custom">
+                                    <h6 class="mt-3 delete-account-heading">Delete Account</h6>
+                                    <p class="delete-account-subheading">Warning. Once you delete your account, there's no going back</p>
+                                    <form class="delete-button-profile" id="delete-account-form" action="{{ route('deleteAccount') }}" method="POST">
                                         @csrf
-                                        <div class="mb-3">
-                                            <label for="current_password" class="form-label label-custom">Current Password</label>
-                                            <input type="password" class="form-control" id="current_password" name="current_password" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="new_password" class="form-label label-custom">New Password</label>
-                                            <input type="password" class="form-control" id="new_password" name="new_password" required>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="new_password_confirmation" class="form-label label-custom">Confirm New Password</label>
-                                            <input type="password" class="form-control" id="new_password_confirmation" name="new_password_confirmation" required>
-                                        </div>
-                                        <div class="col-auto">
-                                            <button type="submit" class="btn btn-primary mb-3">Change Password</button>
-                                        </div>
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-danger" id="delete-account-btn">Delete This Account</button>
                                     </form>
                                 </div>
                             </div>
-
-                            <div class="col-lg-6">
-                                <div class="li-wrapper">
-                                    <h5 class="mb-5 text-center">Login History</h5>
-
-                                    <ul class="list-group">
-                                        @foreach (Auth::user()->loginHistories->sortByDesc('logged_in_at')->take(5) as $login)
-                                            <li class="list-group-item">{{ $login->logged_in_at->format('Y-m-d H:i:s') }}</li>
-                                        @endforeach
-                                    </ul>
-
-                                    @if (Auth::user()->loginHistories->count() > 5)
-                                        <!-- View More Button -->
-                                        <button type="button" class="btn btn-link" data-bs-toggle="modal" data-bs-target="#loginHistoryModal">
-                                            View More
-                                        </button>
-                                    @endif
-                                </div>
-                            </div>
                         </div>
                     </div>
-
-                    <!-- View All Modal -->
-                    <div class="modal fade" id="loginHistoryModal" tabindex="-1" aria-labelledby="loginHistoryModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="loginHistoryModalLabel">Full Login History</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <ul class="list-group">
-                                        @foreach (Auth::user()->loginHistories->sortByDesc('logged_in_at') as $login)
-                                            <li class="list-group-item">{{ $login->logged_in_at->format('Y-m-d H:i:s') }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
 
                     <script>
                         document.getElementById('delete-account-btn').addEventListener('click', function (e) {
