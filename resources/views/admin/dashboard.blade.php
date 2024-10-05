@@ -91,53 +91,92 @@
 
             <!-- start: Summary -->
             <div class="row mb-5">
-                <!-- ACIC Folder -->
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
-                    <a href="{{ url('admin/acic') }}" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
-                        <div>
-                            <i class="fa-solid fa-folder summary-icon mb-2"
-                                style="display: flex; justify-content: center; align-items: center; width: 65px; height: 65px; border-radius: 50%; background-color: #007bff; color: white; font-size: 24px;"></i>
-                            <div>TOTAL ACIC FOLDERS</div>
+
+                <div class="col-lg-6">
+
+                    <div class="row">
+
+                        <!-- ACIC Folder -->
+                        <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                            <a href="{{ url('admin/acic') }}" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                                <div>
+                                    <i class="fa-solid fa-folder summary-icon mb-2"
+                                        style="display: flex; justify-content: center; align-items: center; width: 65px; height: 65px; border-radius: 50%; background-color: #007bff; color: white; font-size: 24px;"></i>
+                                    <div>TOTAL ACIC FOLDERS</div>
+                                </div>
+                                <h4>{{ $acicCount }}</h4> <!-- Display the dynamic ACIC count -->
+                            </a>
                         </div>
-                        <h4>{{ $acicCount }}</h4> <!-- Display the dynamic ACIC count -->
-                    </a>
+
+                        <!-- MDS Folder -->
+                        <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                            <a href="{{ url('admin/mds') }}" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                                <div>
+                                    <i class="fa-solid fa-folder summary-icon mb-2"
+                                        style="display: flex; justify-content: center; align-items: center; width: 65px; height: 65px; border-radius: 50%; background-color: #d63384; color: white; font-size: 24px;"></i>
+                                    <div>TOTAL MDS FOLDERS</div>
+                                </div>
+                                <h4>{{ $mdsCount }}</h4> <!-- Display the dynamic MDS count -->
+                            </a>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <!-- ACIC Completed Folder -->
+                        <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                            <a href="#!" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                                <div>
+                                    <i class="fa-solid fa-circle-check summary-icon mb-2"
+                                        style="display: flex; justify-content: center; align-items: center; width: 65px; height: 65px; border-radius: 50%; background-color: #198754; color: white; font-size: 24px;"></i>
+                                    <div>TOTAL COMPLETED FOLDERS</div>
+                                </div>
+                                <h4>{{ $completedCount }}</h4> <!-- Display the dynamic completed count -->
+                            </a>
+                        </div>
+
+                        <!-- In-progress Folders -->
+                        <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                            <a href="#!" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
+                                <div>
+                                    <i class="fa-solid fa-spinner summary-icon mb-2"
+                                        style="display: flex; justify-content: center; align-items: center; width: 65px; height: 65px; border-radius: 50%; background-color: #ffc107; color: white; font-size: 24px;"></i>
+                                    <div>TOTAL IN-PROGRESS FOLDERS</div>
+                                </div>
+                                <h4>{{ $inProgressCount }}</h4> <!-- Display the dynamic in-progress count -->
+                            </a>
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <!-- MDS Folder -->
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
-                    <a href="{{ url('admin/mds') }}" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
-                        <div>
-                            <i class="fa-solid fa-folder summary-icon mb-2"
-                                style="display: flex; justify-content: center; align-items: center; width: 65px; height: 65px; border-radius: 50%; background-color: #d63384; color: white; font-size: 24px;"></i>
-                            <div>TOTAL MDS FOLDERS</div>
+                <div class="col-lg-6 ">
+
+                    <div class="card rounded shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">Recent Activity</h5>
+
+                            <div class="activity">
+                                <div class="activity-item d-flex">
+                                    <div class="activite-label">32 min ago</div>
+                                    <i class="fa-solid fa-pen-to-square" style="color: #198754; font-size: 15px;"></i>
+                                    <div class="activity-content ms-2">
+                                        Updated <a href="#" class="fw-bold text-dark">Acic 101 </a> by "Name of the admin"
+                                    </div>
+                                </div>
+                            </div>  
+
                         </div>
-                        <h4>{{ $mdsCount }}</h4> <!-- Display the dynamic MDS count -->
-                    </a>
+                    </div>
+
                 </div>
 
-                <!-- ACIC Completed Folder -->
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
-                    <a href="#!" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
-                        <div>
-                            <i class="fa-solid fa-circle-check summary-icon mb-2"
-                                style="display: flex; justify-content: center; align-items: center; width: 65px; height: 65px; border-radius: 50%; background-color: #198754; color: white; font-size: 24px;"></i>
-                            <div>TOTAL COMPLETED FOLDERS</div>
-                        </div>
-                        <h4>{{ $completedCount }}</h4> <!-- Display the dynamic completed count -->
-                    </a>
-                </div>
 
-                <!-- In-progress Folders -->
-                <div class="col-lg-3 col-md-6 col-sm-12 mb-2">
-                    <a href="#!" class="text-dark text-decoration-none bg-white p-3 rounded shadow-sm d-flex justify-content-between summary-primary">
-                        <div>
-                            <i class="fa-solid fa-spinner summary-icon mb-2"
-                                style="display: flex; justify-content: center; align-items: center; width: 65px; height: 65px; border-radius: 50%; background-color: #ffc107; color: white; font-size: 24px;"></i>
-                            <div>TOTAL IN-PROGRESS FOLDERS</div>
-                        </div>
-                        <h4>{{ $inProgressCount }}</h4> <!-- Display the dynamic in-progress count -->
-                    </a>
-                </div>
+
+
+
             </div>
 
             {{-- Alerts --}}
@@ -232,15 +271,16 @@
                 <div class="modal fade" id="viewRecordModal{{ $record->id }}" tabindex="-1" aria-labelledby="viewRecordLabel{{ $record->id }}" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="viewRecordLabel{{ $record->id }}">Record Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-header my-auto status-container {{ $record->status === 'completed' ? 'completed' : 'in-progress' }}" style="display: flex; align-items: center; justify-content: center; position: relative;">
+                                <span class="text-center">{{ strtoupper(str_replace('_', ' ', $record->status)) }} <!-- Format status --></span>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; right: 15px;"></button>
                             </div>
+
                             <div class="modal-body text-center">
                                 <div class="head-folder-container mb-4">
-                                    <div class="mb-3 mb-2 status-container {{ $record->status === 'completed' ? 'completed' : 'in-progress' }} ">
+                                    {{-- <div class="mb-3 mb-2 status-container {{ $record->status === 'completed' ? 'completed' : 'in-progress' }}">
                                         {{ strtoupper(str_replace('_', ' ', $record->status)) }} <!-- Format status -->
-                                    </div>
+                                    </div> --}}
 
                                     <div class="folder-name-container">
                                         <h2>{{ strtoupper(str_replace('_', ' ', $record->folder_name)) }}</h2> <!-- Capitalize folder name -->
@@ -262,6 +302,7 @@
                                     <div class="remarks-container">{{ $record->remarks }}</div>
                                 </div>
                             </div>
+
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
