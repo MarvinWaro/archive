@@ -101,15 +101,15 @@
                 <div class="modal fade" id="viewRecordModal{{ $record->id }}" tabindex="-1" aria-labelledby="viewRecordLabel{{ $record->id }}" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="viewRecordLabel{{ $record->id }}">Record Details</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <div class="modal-header my-auto status-container {{ $record->status === 'completed' ? 'completed' : 'in-progress' }}" style="display: flex; align-items: center; justify-content: center; position: relative;">
+                                <span class="text-center">{{ strtoupper(str_replace('_', ' ', $record->status)) }} <!-- Format status --></span>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="position: absolute; right: 15px;"></button>
                             </div>
                             <div class="modal-body text-center">
                                 <div class="head-folder-container mb-4">
-                                    <div class="mb-3 mb-2 status-container {{ $record->status === 'completed' ? 'completed' : 'in-progress' }} ">
+                                    {{-- <div class="mb-3 mb-2 status-container {{ $record->status === 'completed' ? 'completed' : 'in-progress' }} ">
                                         {{ strtoupper(str_replace('_', ' ', $record->status)) }} <!-- Format status -->
-                                    </div>
+                                    </div> --}}
 
                                     <div class="folder-name-container">
                                         <h2>{{ strtoupper(str_replace('_', ' ', $record->folder_name)) }}</h2> <!-- Capitalize folder name -->

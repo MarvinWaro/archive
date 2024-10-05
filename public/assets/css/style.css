@@ -1362,21 +1362,24 @@ tbody tr td a{
 .status-container.completed {
     background-color: var(--bs-green);
     color: var(--bs-light);
-    border-radius: 10px;
-    padding: 15px 10px;
+    /* border-radius: 10px; */
+    padding-top: 25px;
+    padding-bottom: 25px;
     font-weight: 600;
     font-size: 15px;
     letter-spacing: 5px;
+    text-align: center !important;
 }
 
 .status-container.in-progress {
     background-color: var(--bs-orange);
     color: var(--bs-light);
-    border-radius: 10px;
-    padding: 15px 10px;
+    padding-top: 25px;
+    padding-bottom: 25px;
     font-weight: 600;
     font-size: 15px;
     letter-spacing: 5px;
+    text-align: center !important;
 }
 
 
@@ -1477,6 +1480,55 @@ tbody tr td a{
     background-color: #d9534f; /* Red background for danger confirm button */
     color: white; /* White text color */
 }
+
+
+/* Activity */
+.activity {
+    font-size: 14px;
+}
+
+.activity .activity-item .activite-label {
+    color: #888;
+    position: relative;
+    flex-shrink: 0;
+    flex-grow: 0;
+    min-width: 64px;
+}
+
+/* .activity .activity-item .activite-label::before {
+    content: "";
+    position: absolute;
+    right: -11px;
+    width: 4px;
+    top: 0;
+    bottom: 0;
+    background-color: #eceefe;
+} */
+
+.activity .activity-item .activity-badge {
+    margin-top: 3px;
+    z-index: 1;
+    font-size: 11px;
+    line-height: 0;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 3px solid #fff;
+    flex-grow: 0;
+}
+
+.activity .activity-item .activity-content {
+    padding-left: 10px;
+    padding-bottom: 20px;
+}
+
+.activity .activity-item:first-child .activite-label::before {
+    top: 5px;
+}
+
+.activity .activity-item:last-child .activity-content {
+    padding-bottom: 0;
+}
+
 
 
 
